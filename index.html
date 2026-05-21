@@ -4,7 +4,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Single-Image Dashboard Prototype</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./Customer Single-Image Dashboard Prototype_files/styles.css">
   </head>
   <body>
     <div class="app-shell">
@@ -169,16 +169,6 @@
               </div>
             </div>
 
-            <div class="relationship-flags">
-              <label class="check-row">
-                <input type="checkbox" id="popToggle" checked="">
-                <span>POP</span>
-              </label>
-              <label class="check-row">
-                <input type="checkbox" id="blockingToggle">
-                <span>Blocking</span>
-              </label>
-            </div>
           </section>
 
           <nav class="domain-tabs" aria-label="Customer 360 domains">
@@ -197,6 +187,7 @@
               <article class="panel account-status-card" data-hotspot="status">
                 <div class="panel-title">
                   <h2>Account Status</h2>
+                  <span class="updated-copy">Updated: <span class="last-updated">2025-05-18 09:35</span></span>
                 </div>
                 <div class="status-emblem">
                   <span class="shield">
@@ -204,6 +195,44 @@
                   </span>
                   <strong id="accountStatus">Active</strong>
                   <p>Account is operating normally</p>
+                </div>
+                <div class="status-history" aria-label="Status history">
+                  <div class="status-history-head">
+                    <h3>Status History</h3>
+                    <span>Last 6 months</span>
+                  </div>
+                  <div class="status-bars">
+                    <span class="status-bar active" style="--h: 82%">
+                      <i></i>
+                      <b>Dec</b>
+                      <small>Active</small>
+                    </span>
+                    <span class="status-bar active" style="--h: 88%">
+                      <i></i>
+                      <b>Jan</b>
+                      <small>Active</small>
+                    </span>
+                    <span class="status-bar watch" style="--h: 56%">
+                      <i></i>
+                      <b>Feb</b>
+                      <small>Watch</small>
+                    </span>
+                    <span class="status-bar active" style="--h: 76%">
+                      <i></i>
+                      <b>Mar</b>
+                      <small>Active</small>
+                    </span>
+                    <span class="status-bar active" style="--h: 84%">
+                      <i></i>
+                      <b>Apr</b>
+                      <small>Active</small>
+                    </span>
+                    <span class="status-bar active" style="--h: 92%">
+                      <i></i>
+                      <b>May</b>
+                      <small>Active</small>
+                    </span>
+                  </div>
                 </div>
                 <button class="outline-button success" data-demo-step="identity">Identity &amp; Governance</button>
               </article>
@@ -971,6 +1000,8 @@
       </div>
     </div>
 
+    <div class="drawer-backdrop" id="drawerBackdrop" hidden=""></div>
+
     <aside class="insight-drawer" id="insightDrawer" aria-hidden="true">
       <div class="drawer-header">
         <div>
@@ -1035,12 +1066,12 @@
       </section>
     </div>
 
-    <section class="demo-dock" aria-label="Interaction demo">
+    <section class="demo-dock" aria-label="AI insights">
       <div>
-        <strong>Scenario</strong>
+        <strong>AI Insights</strong>
         <span id="demoStatus">Account narrative</span>
       </div>
-      <button class="icon-button" id="autoDemoButton" aria-label="Play scenario">
+      <button class="icon-button" id="autoDemoButton" aria-label="Play AI insights">
         <span class="nav-icon" data-icon="play"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"></path></svg></span>
       </button>
       <button class="scenario-chip active" data-demo-step="profile">Profile</button>
@@ -1053,7 +1084,7 @@
 
     <div class="toast-root" id="toastRoot" aria-live="polite"></div>
 
-    <script src="./script.js"></script>
+    <script src="./Customer Single-Image Dashboard Prototype_files/script.js"></script>
   
 
 </body></html>
