@@ -690,19 +690,23 @@ function drawerTemplate(type, payload = {}) {
 
 function openDrawer(type, payload) {
   const drawer = document.getElementById("insightDrawer");
+  const backdrop = document.getElementById("drawerBackdrop");
   const template = drawerTemplate(type, payload);
   document.getElementById("drawerKicker").textContent = template.kicker;
   document.getElementById("drawerTitle").textContent = template.title;
   document.getElementById("drawerBody").innerHTML = template.body;
   mountIcons(document.getElementById("drawerBody"));
+  backdrop.hidden = false;
   drawer.classList.add("open");
   drawer.setAttribute("aria-hidden", "false");
 }
 
 function closeDrawer() {
   const drawer = document.getElementById("insightDrawer");
+  const backdrop = document.getElementById("drawerBackdrop");
   drawer.classList.remove("open");
   drawer.setAttribute("aria-hidden", "true");
+  backdrop.hidden = true;
 }
 
 function openModal() {
@@ -862,7 +866,7 @@ function toggleAutoDemo() {
     demoTimer = null;
     button.innerHTML = `<span class="nav-icon" data-icon="play"></span>`;
     mountIcons(button);
-    toast("Scenario paused");
+    toast("AI Insights paused");
     return;
   }
   runDemoStep(demoSteps[demoIndex].id);
@@ -872,6 +876,15 @@ function toggleAutoDemo() {
   }, 2600);
   button.innerHTML = `<span class="nav-icon" data-icon="pause"></span>`;
   mountIcons(button);
+}
+
+function updateInsightsDockDensity() {
+  const dock = document.querySelector(".demo-dock");
+  if (!dock) return;
+  const scrollable = document.documentElement.scrollHeight > window.innerHeight + 80;
+  const distanceToBottom =
+    document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
+  dock.classList.toggle("small", scrollable && distanceToBottom < 180);
 }
 
 function wireEvents() {
@@ -889,6 +902,7 @@ function wireEvents() {
 
   document.getElementById("healthSummary").addEventListener("click", () => openDrawer("risk"));
   document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
+  document.getElementById("drawerBackdrop").addEventListener("click", closeDrawer);
   document.getElementById("addContactButton").addEventListener("click", openModal);
   document.getElementById("closeModal").addEventListener("click", closeModal);
   document.getElementById("cancelModal").addEventListener("click", closeModal);
@@ -899,14 +913,8 @@ function wireEvents() {
   });
   document.getElementById("exportButton").addEventListener("click", exportContacts);
   document.getElementById("autoDemoButton").addEventListener("click", toggleAutoDemo);
-
-  document.getElementById("popToggle").addEventListener("change", (event) => {
-    toast(event.target.checked ? "POP relationship marked" : "POP relationship removed");
-  });
-
-  document.getElementById("blockingToggle").addEventListener("change", (event) => {
-    toast(event.target.checked ? "Blocking stakeholder marked" : "Blocking marker cleared");
-  });
+  window.addEventListener("scroll", updateInsightsDockDensity, { passive: true });
+  window.addEventListener("resize", updateInsightsDockDensity);
 
   document.getElementById("contactForm").addEventListener("submit", (event) => {
     event.preventDefault();
@@ -988,3 +996,4 @@ function wireEvents() {
 mountIcons();
 wireEvents();
 renderCustomer("anxun", { silent: true });
+updateInsightsDockDensity();
