@@ -19,7 +19,7 @@
   --violet-soft: #f1ecff;
   --shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
   --radius: 8px;
-  --sidebar-width: 196px;
+  --sidebar-width: 204px;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -68,6 +68,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  overflow-x: hidden;
   padding: 18px 10px;
   background: var(--panel);
   border-right: 1px solid var(--line);
@@ -80,7 +81,8 @@ button {
   min-height: 42px;
   padding: 0 8px;
   font-weight: 750;
-  white-space: nowrap;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .brand-mark {
@@ -106,22 +108,32 @@ button {
 .nav-list {
   display: grid;
   gap: 6px;
+  min-width: 0;
 }
 
 .nav-item,
 .collapse-button {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   width: 100%;
+  max-width: 100%;
   min-height: 42px;
-  padding: 0 10px;
+  padding: 10px;
   border: 0;
   border-radius: var(--radius);
   background: transparent;
   color: #344054;
+  line-height: 1.25;
+  overflow: hidden;
+  overflow-wrap: anywhere;
   text-align: left;
-  white-space: nowrap;
+  white-space: normal;
+}
+
+.nav-item .nav-icon,
+.collapse-button .nav-icon {
+  margin-top: -1px;
 }
 
 .nav-item:hover,
@@ -355,10 +367,16 @@ button {
 
 .profile-hero {
   display: grid;
-  grid-template-columns: minmax(230px, 1.2fr) minmax(300px, 1.5fr) auto minmax(120px, 0.7fr) minmax(210px, 1fr) minmax(92px, 0.35fr);
-  align-items: center;
-  gap: 18px;
-  padding: 20px 22px;
+  grid-template-columns:
+    minmax(285px, 1.1fr)
+    minmax(380px, 1.42fr)
+    minmax(82px, 0.32fr)
+    minmax(240px, 0.9fr)
+    minmax(215px, 0.78fr);
+  grid-template-areas: "head metrics health risk owners";
+  align-items: stretch;
+  gap: 8px;
+  padding: 8px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--panel);
@@ -366,18 +384,23 @@ button {
 }
 
 .customer-head {
+  grid-area: head;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
 }
 
 .customer-avatar {
-  width: 60px;
-  height: 60px;
+  width: 44px;
+  height: 44px;
   background: var(--blue);
   color: #fff;
-  font-size: 23px;
+  font-size: 19px;
 }
 
 h1,
@@ -389,8 +412,9 @@ p {
 
 h1 {
   overflow-wrap: anywhere;
-  font-size: 22px;
-  line-height: 1.2;
+  font-size: 17px;
+  line-height: 1.18;
+  white-space: nowrap;
 }
 
 h2 {
@@ -410,10 +434,15 @@ h3 {
   margin-top: 8px;
 }
 
+.profile-hero .customer-tags {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
 .customer-tags span,
 .tag {
   display: inline-flex;
-  min-height: 26px;
+  min-height: 24px;
   align-items: center;
   padding: 0 9px;
   border: 1px solid transparent;
@@ -456,23 +485,34 @@ h3 {
 }
 
 .hero-metrics {
+  grid-area: metrics;
   display: grid;
-  grid-template-columns: repeat(4, minmax(74px, 1fr));
-  gap: 0;
-  border-left: 1px solid var(--line);
-  border-right: 1px solid var(--line);
+  grid-template-columns:
+    minmax(44px, 0.48fr)
+    minmax(136px, 1.45fr)
+    minmax(78px, 0.82fr)
+    minmax(74px, 0.78fr);
+  gap: 5px;
+  min-width: 0;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
 }
 
 .metric-block {
   display: grid;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
-  padding: 0 14px;
-  border-right: 1px solid var(--line);
+  align-content: center;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
 }
 
 .metric-block:last-child {
-  border-right: 0;
+  border-right: 1px solid var(--line);
 }
 
 .metric-block span,
@@ -496,17 +536,31 @@ h3 {
   font-size: 14px;
 }
 
+.metric-block span,
+.metric-block strong {
+  white-space: nowrap;
+}
+
+.metric-block strong {
+  font-size: 11.5px;
+  line-height: 1.25;
+}
+
 .metric-block:first-child strong {
   color: var(--blue);
 }
 
 .health-summary {
+  grid-area: health;
   display: grid;
-  gap: 8px;
+  gap: 4px;
   justify-items: center;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  align-content: center;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
   color: var(--green);
 }
 
@@ -514,15 +568,15 @@ h3 {
 .donut {
   position: relative;
   display: grid;
-  width: 82px;
-  height: 82px;
+  width: 52px;
+  height: 52px;
   place-items: center;
   border-radius: 50%;
   background:
     radial-gradient(circle at center, #fff 0 58%, transparent 59%),
     conic-gradient(var(--green) calc(var(--score) * 1%), #edf1f6 0);
   color: var(--text);
-  font-size: 29px;
+  font-size: 20px;
   font-weight: 800;
 }
 
@@ -534,15 +588,31 @@ h3 {
 }
 
 .risk-strip {
+  grid-area: risk;
   display: grid;
-  gap: 10px;
-  padding-right: 16px;
-  border-right: 1px solid var(--line);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
 }
 
 .risk-strip div {
   display: grid;
   gap: 2px;
+  align-content: center;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.risk-strip span,
+.risk-strip strong {
+  white-space: nowrap;
 }
 
 .positive {
@@ -558,14 +628,21 @@ h3 {
 }
 
 .owner-strip {
+  grid-area: owners;
   display: grid;
-  gap: 12px;
+  gap: 4px;
+  min-width: 0;
+  align-content: center;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
 }
 
 .owner-card {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -577,35 +654,22 @@ h3 {
 .owner-card small {
   overflow: hidden;
   color: #475467;
-  font-size: 12px;
+  font-size: 11px;
+  line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .mini-avatar {
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   color: var(--blue);
   background: var(--blue-soft);
 }
 
-.relationship-flags {
-  display: grid;
-  gap: 22px;
-  justify-content: start;
-}
-
-.check-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-}
-
-.check-row input {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--blue);
+.owner-card strong {
+  font-size: 13px;
+  line-height: 1.15;
 }
 
 .domain-tabs {
@@ -660,7 +724,7 @@ h3 {
 
 .identity-grid {
   display: grid;
-  grid-template-columns: 200px minmax(0, 1.5fr) minmax(290px, 0.95fr);
+  grid-template-columns: clamp(250px, 22vw, 280px) minmax(0, 1.45fr) minmax(300px, 0.95fr);
   gap: 16px;
 }
 
@@ -735,7 +799,7 @@ h3 {
   display: grid;
   justify-items: center;
   gap: 14px;
-  min-height: 230px;
+  min-height: 160px;
   align-content: center;
   text-align: center;
 }
@@ -758,6 +822,86 @@ h3 {
 .status-emblem p {
   color: var(--muted);
   font-size: 12px;
+}
+
+.account-status-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-status-card .panel-title {
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.account-status-card > .outline-button {
+  align-self: center;
+  margin-top: 16px;
+}
+
+.status-history {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
+}
+
+.status-history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.status-history-head span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.status-bars {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  align-items: end;
+  min-height: 128px;
+}
+
+.status-bar {
+  display: grid;
+  grid-template-rows: 82px auto auto;
+  gap: 6px;
+  justify-items: center;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.status-bar i {
+  display: block;
+  align-self: end;
+  width: 100%;
+  max-width: 22px;
+  height: var(--h);
+  border-radius: 6px 6px 3px 3px;
+  background: var(--green);
+}
+
+.status-bar.watch i {
+  background: var(--amber);
+}
+
+.status-bar b {
+  color: var(--text);
+  font-size: 11px;
+}
+
+.status-bar small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 10px;
 }
 
 .account-status-card,
@@ -803,8 +947,8 @@ h3 {
 
 .info-split {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 150px;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) minmax(176px, 0.42fr);
+  gap: 20px;
   align-items: start;
   margin-top: 16px;
 }
@@ -822,7 +966,7 @@ h3 {
 }
 
 .detail-list.compact div {
-  grid-template-columns: minmax(100px, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(108px, 0.9fr) minmax(0, 1fr);
 }
 
 .detail-list dd {
@@ -830,9 +974,26 @@ h3 {
   font-weight: 650;
 }
 
+.detail-list.compact dt,
+.detail-list.compact dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .linked-id-list {
   display: grid;
   gap: 9px;
+  align-self: stretch;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid #9dc0ff;
+  border-radius: 8px;
+  background: #f9fbff;
+}
+
+.linked-id-list h3 {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
 }
 
 .system-pill {
@@ -1178,24 +1339,46 @@ tr:last-child td {
   align-self: start;
 }
 
+.contracts-card .detail-list.compact {
+  margin-bottom: 18px;
+}
+
+.contracts-card .panel-title {
+  flex-wrap: wrap;
+}
+
+.contracts-card .document-button {
+  margin-top: 4px;
+}
+
 .snapshot-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 70px 82px;
-  gap: 10px;
+  grid-template-columns: minmax(92px, 1fr) 58px 76px;
+  gap: 8px;
   align-items: center;
   padding: 10px 0;
+}
+
+.snapshot-row > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .snapshot-row.strong {
   color: var(--text);
 }
 
+.snapshot-row.strong strong {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
 .mini-score {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   place-items: center;
-  border: 4px solid var(--green);
+  border: 3px solid var(--green);
   border-radius: 50%;
   color: var(--text);
   font-weight: 800;
@@ -1652,6 +1835,17 @@ tr:last-child td {
   transition: transform 180ms ease;
 }
 
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: transparent;
+}
+
+.drawer-backdrop[hidden] {
+  display: none;
+}
+
 .insight-drawer.open {
   transform: translateX(0);
 }
@@ -1782,6 +1976,7 @@ tr:last-child td {
   background: rgba(255, 255, 255, 0.96);
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
+  transition: max-width 160ms ease, padding 160ms ease, transform 160ms ease;
 }
 
 .demo-dock > div {
@@ -1793,6 +1988,25 @@ tr:last-child td {
 .demo-dock span {
   color: var(--muted);
   font-size: 12px;
+}
+
+.demo-dock.small {
+  flex-wrap: nowrap;
+  max-width: min(214px, calc(100vw - 36px));
+  padding: 8px;
+}
+
+.demo-dock.small > div {
+  min-width: 0;
+}
+
+.demo-dock.small #demoStatus,
+.demo-dock.small .scenario-chip {
+  display: none;
+}
+
+.demo-dock.small strong {
+  white-space: nowrap;
 }
 
 .scenario-chip {
@@ -1857,47 +2071,76 @@ tr:last-child td {
 
 @media (max-width: 1380px) and (min-width: 1181px) {
   .profile-hero {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(285px, 0.95fr) minmax(0, 1.25fr) minmax(230px, 0.8fr);
+    grid-template-areas:
+      "head metrics health"
+      "risk risk owners";
+    align-items: start;
   }
 
   .hero-metrics,
   .risk-strip,
-  .owner-strip,
-  .relationship-flags {
-    border: 0;
+  .owner-strip {
+    border: 1px solid var(--line);
   }
 
-  .relationship-flags {
-    grid-template-columns: repeat(2, max-content);
-    align-items: center;
+  .hero-metrics {
+    grid-template-columns:
+      minmax(44px, 0.48fr)
+      minmax(136px, 1.45fr)
+      minmax(78px, 0.82fr)
+      minmax(74px, 0.78fr);
+  }
+
+  .risk-strip {
+    padding-left: 0;
   }
 }
 
 @media (max-width: 1180px) {
   .profile-hero {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(285px, 0.95fr) minmax(240px, 1fr) minmax(230px, 0.82fr);
+    grid-template-areas:
+      "head health owners"
+      "metrics metrics risk";
+    align-items: start;
   }
 
   .hero-metrics,
   .risk-strip,
-  .owner-strip,
-  .relationship-flags {
-    border: 0;
+  .owner-strip {
+    border: 1px solid var(--line);
+  }
+
+  .hero-metrics {
+    grid-template-columns:
+      minmax(44px, 0.48fr)
+      minmax(136px, 1.45fr)
+      minmax(78px, 0.82fr)
+      minmax(74px, 0.78fr);
+  }
+
+  .risk-strip {
+    padding-left: 0;
+  }
+
+  .owner-strip {
+    align-content: stretch;
   }
 
   .identity-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
   }
 
   .account-status-card,
   .contracts-card,
-  .snapshot-card,
+  .snapshot-card {
+    grid-column: 1;
+  }
+
   .basic-info-card,
-  .risk-card,
-  .contacts-card,
-  .governance-card,
-  .systems-card {
-    grid-column: auto;
+  .risk-card {
+    grid-column: 2;
   }
 
   .contacts-card,
@@ -1982,14 +2225,38 @@ tr:last-child td {
     grid-template-columns: 1fr;
   }
 
+  .account-status-card,
+  .contracts-card,
+  .snapshot-card,
+  .basic-info-card,
+  .risk-card,
+  .contacts-card,
+  .governance-card,
+  .systems-card {
+    grid-column: auto;
+  }
+
+  .profile-hero {
+    grid-template-areas:
+      "head"
+      "metrics"
+      "health"
+      "risk"
+      "owners";
+  }
+
   .hero-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .linked-id-list {
+    border-left-width: 1px;
+    border-top: 3px solid #9dc0ff;
+  }
+
   .metric-block {
     padding: 10px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
+    border: 1px solid var(--line);
   }
 
   .governance-summary {
@@ -2044,6 +2311,11 @@ tr:last-child td {
     grid-template-columns: 1fr;
   }
 
+  .metric-block span,
+  .metric-block strong {
+    white-space: normal;
+  }
+
   .panel {
     padding: 14px;
   }
@@ -2060,5 +2332,9 @@ tr:last-child td {
 
   .demo-dock > div {
     min-width: 100%;
+  }
+
+  .demo-dock.small > div {
+    min-width: 0;
   }
 }
