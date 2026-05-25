@@ -34,19 +34,20 @@ const customers = {
     name: "Anxun Technology Co., Ltd.",
     tier: "Tier 2",
     industry: "Technology / Software",
-    arr: "$12,560,000",
+    arr: "$2,640,000",
     expiration: "2026-12-31",
+    location: "New York, USA",
     score: 86,
     health: "Healthy",
     churn: "Low",
     oes: "8.1 / 10",
     nps: "42",
-    executive: { name: "David Lee", email: "david.lee@anxun.com" },
-    csm: { name: "Emma Wang", email: "emma.wang@anxun.com" },
-    customerId: "CUST-ANXUN-06078",
+    executive: { name: "David Lee", email: "david.lee@derbysoft.net" },
+    csm: { name: "Emma Wang", email: "emma.wang@derbysoft.net" },
+    customerId: "CUST-ANXUN-99875",
     hq: "Beijing, China",
     parent: "Anxun Group",
-    tags: ["Strategic", "High Value", "SaaS"],
+    tags: ["Tier logo", "High Value", "SaaS", "AI"],
     contacts: [
       {
         role: "Decision Maker",
@@ -356,7 +357,9 @@ function renderCustomer(key, options = {}) {
   setText("infoVertical", customer.industry);
   setText("infoHq", customer.hq);
   setText("infoParent", customer.parent);
-  document.getElementById("scoreRing").style.setProperty("--score", customer.score);
+  setText("infoLocation", customer.location || customer.hq);
+  const scoreRing = document.getElementById("scoreRing");
+  if (scoreRing) scoreRing.style.setProperty("--score", customer.score);
   renderTags("heroTags", customer.tags);
   renderIdentityTags(customer.tags);
   renderContacts();
@@ -900,7 +903,8 @@ function wireEvents() {
     button.addEventListener("click", () => switchRiskTab(button));
   });
 
-  document.getElementById("healthSummary").addEventListener("click", () => openDrawer("risk"));
+  const healthSummary = document.getElementById("healthSummary");
+  if (healthSummary) healthSummary.addEventListener("click", () => openDrawer("risk"));
   document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
   document.getElementById("drawerBackdrop").addEventListener("click", closeDrawer);
   document.getElementById("addContactButton").addEventListener("click", openModal);
