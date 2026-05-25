@@ -179,10 +179,10 @@ button {
   z-index: 40;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 18px;
-  min-height: 70px;
-  padding: 14px 24px;
+  min-height: 60px;
+  padding: 10px 24px;
   background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px);
@@ -192,7 +192,8 @@ button {
   position: relative;
   display: flex;
   align-items: center;
-  width: min(460px, 100%);
+  width: min(430px, 100%);
+  min-width: 260px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   background: var(--panel);
@@ -367,16 +368,11 @@ button {
 
 .profile-hero {
   display: grid;
-  grid-template-columns:
-    minmax(285px, 1.1fr)
-    minmax(380px, 1.42fr)
-    minmax(82px, 0.32fr)
-    minmax(240px, 0.9fr)
-    minmax(215px, 0.78fr);
-  grid-template-areas: "head metrics health risk owners";
+  grid-template-columns: minmax(360px, 0.95fr) minmax(470px, 1.35fr) minmax(260px, 0.68fr);
+  grid-template-areas: "head metrics owners";
   align-items: stretch;
-  gap: 8px;
-  padding: 8px;
+  gap: 10px;
+  padding: 10px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--panel);
@@ -387,12 +383,17 @@ button {
   grid-area: head;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   min-width: 0;
-  padding: 10px;
+  padding: 10px 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel-soft);
+}
+
+.customer-title-stack {
+  display: grid;
+  min-width: 0;
 }
 
 .customer-avatar {
@@ -411,9 +412,11 @@ p {
 }
 
 h1 {
-  overflow-wrap: anywhere;
+  min-width: 0;
+  overflow: hidden;
   font-size: 17px;
   line-height: 1.18;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -487,12 +490,8 @@ h3 {
 .hero-metrics {
   grid-area: metrics;
   display: grid;
-  grid-template-columns:
-    minmax(44px, 0.48fr)
-    minmax(136px, 1.45fr)
-    minmax(78px, 0.82fr)
-    minmax(74px, 0.78fr);
-  gap: 5px;
+  grid-template-columns: minmax(52px, 0.55fr) minmax(150px, 1.45fr) minmax(92px, 0.95fr) minmax(104px, 1fr);
+  gap: 6px;
   min-width: 0;
   padding: 6px;
   border: 1px solid var(--line);
@@ -502,7 +501,7 @@ h3 {
 
 .metric-block {
   display: grid;
-  gap: 6px;
+  gap: 5px;
   min-width: 0;
   align-content: center;
   padding: 6px;
@@ -513,6 +512,14 @@ h3 {
 
 .metric-block:last-child {
   border-right: 1px solid var(--line);
+}
+
+.metric-block.wide {
+  grid-column: span 2;
+}
+
+.metric-block.muted-block {
+  background: #f3f7fd;
 }
 
 .metric-block span,
@@ -542,7 +549,7 @@ h3 {
 }
 
 .metric-block strong {
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.25;
 }
 
@@ -630,13 +637,12 @@ h3 {
 .owner-strip {
   grid-area: owners;
   display: grid;
-  gap: 4px;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 8px;
   min-width: 0;
-  align-content: center;
-  padding: 8px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel-soft);
+  align-content: stretch;
+  padding: 0;
 }
 
 .owner-card {
@@ -644,6 +650,10 @@ h3 {
   align-items: center;
   gap: 8px;
   min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
 }
 
 .owner-card div {
@@ -652,12 +662,13 @@ h3 {
 }
 
 .owner-card small {
-  overflow: hidden;
+  overflow: visible;
   color: #475467;
   font-size: 11px;
   line-height: 1.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .mini-avatar {
@@ -667,6 +678,21 @@ h3 {
   background: var(--blue-soft);
 }
 
+.mini-avatar.portrait {
+  width: 34px;
+  height: 34px;
+  color: #fff;
+  font-size: 11px;
+}
+
+.portrait-david {
+  background: linear-gradient(135deg, #2563eb, #0f68ff);
+}
+
+.portrait-emma {
+  background: linear-gradient(135deg, #e16d8f, #f59e0b);
+}
+
 .owner-card strong {
   font-size: 13px;
   line-height: 1.15;
@@ -674,7 +700,7 @@ h3 {
 
 .domain-tabs {
   position: sticky;
-  top: 70px;
+  top: 60px;
   z-index: 30;
   display: flex;
   overflow-x: auto;
@@ -724,8 +750,22 @@ h3 {
 
 .identity-grid {
   display: grid;
-  grid-template-columns: clamp(250px, 22vw, 280px) minmax(0, 1.45fr) minmax(300px, 0.95fr);
-  gap: 16px;
+  grid-template-columns:
+    minmax(230px, 0.88fr)
+    minmax(315px, 1.18fr)
+    minmax(230px, 0.82fr)
+    minmax(280px, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.left-rail {
+  grid-column: 1;
+  grid-row: 1 / 4;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  min-width: 0;
 }
 
 .panel {
@@ -798,8 +838,8 @@ h3 {
 .status-emblem {
   display: grid;
   justify-items: center;
-  gap: 14px;
-  min-height: 160px;
+  gap: 8px;
+  min-height: 130px;
   align-content: center;
   text-align: center;
 }
@@ -816,7 +856,7 @@ h3 {
 
 .status-emblem strong {
   color: var(--green);
-  font-size: 28px;
+  font-size: 26px;
 }
 
 .status-emblem p {
@@ -834,18 +874,16 @@ h3 {
   flex-wrap: wrap;
 }
 
-.account-status-card > .outline-button {
-  align-self: center;
+.account-status-card > .outline-button,
+.data-source-card > .outline-button {
+  align-self: flex-start;
   margin-top: 16px;
 }
 
 .status-history {
   display: grid;
-  gap: 12px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel-soft);
+  gap: 10px;
+  padding: 2px 0 0;
 }
 
 .status-history-head {
@@ -860,71 +898,136 @@ h3 {
   font-size: 12px;
 }
 
-.status-bars {
+.status-line-chart {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 8px;
-  align-items: end;
-  min-height: 128px;
-}
-
-.status-bar {
-  display: grid;
-  grid-template-rows: 82px auto auto;
   gap: 6px;
-  justify-items: center;
-  min-width: 0;
-  color: var(--muted);
-  font-size: 11px;
-  text-align: center;
+  min-height: 142px;
+  padding: 10px 6px 0;
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(18, 164, 84, 0.04) 100%),
+    #fbfffd;
 }
 
-.status-bar i {
-  display: block;
-  align-self: end;
+.status-line-chart svg {
   width: 100%;
-  max-width: 22px;
-  height: var(--h);
-  border-radius: 6px 6px 3px 3px;
-  background: var(--green);
+  height: 106px;
+  overflow: visible;
 }
 
-.status-bar.watch i {
-  background: var(--amber);
+.chart-band {
+  fill: rgba(18, 164, 84, 0.035);
 }
 
-.status-bar b {
-  color: var(--text);
-  font-size: 11px;
+.chart-grid-line {
+  fill: none;
+  stroke: #e9f1ed;
+  stroke-width: 1;
 }
 
-.status-bar small {
-  min-width: 0;
-  overflow-wrap: anywhere;
+.chart-grid-column {
+  fill: none;
+  stroke: #edf4f0;
+  stroke-width: 1;
+}
+
+.chart-area {
+  fill: url("#statusAreaGradient");
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--green);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4.5;
+  filter: drop-shadow(0 2px 2px rgba(18, 164, 84, 0.16));
+}
+
+.chart-dot {
+  fill: #fff;
+  stroke: var(--green);
+  stroke-width: 3;
+}
+
+.chart-dot.muted {
+  fill: var(--green-soft);
+}
+
+.time-axis,
+.status-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  color: var(--muted);
   font-size: 10px;
 }
 
-.account-status-card,
-.contracts-card,
-.snapshot-card {
-  grid-column: 1;
+.status-legend {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.active-dot {
+  background: var(--green);
+}
+
+.risk-dot {
+  background: var(--amber);
+}
+
+.inactive-dot {
+  background: #64748b;
+}
+
+.ineligible-dot {
+  background: var(--red);
 }
 
 .basic-info-card {
   grid-column: 2;
+  grid-row: 1;
+}
+
+.data-source-card {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .risk-card {
-  grid-column: 3;
+  grid-column: 4;
+  grid-row: 1;
 }
 
 .contacts-card {
-  grid-column: 2 / 4;
+  grid-column: 2 / 5;
+  grid-row: 2;
 }
 
-.governance-card,
+.governance-card {
+  grid-column: 2 / 5;
+  grid-row: 3;
+}
+
 .systems-card {
-  grid-column: 1 / 4;
+  grid-column: 1 / 5;
+  grid-row: 4;
 }
 
 .subtabs {
@@ -942,12 +1045,13 @@ h3 {
 
 .subtab-panel.active,
 .risk-tab-panel.active {
-  display: block;
+  display: grid;
+  gap: 14px;
 }
 
 .info-split {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(176px, 0.42fr);
+  grid-template-columns: 1fr;
   gap: 20px;
   align-items: start;
   margin-top: 16px;
@@ -961,7 +1065,7 @@ h3 {
 
 .detail-list div {
   display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
+  grid-template-columns: minmax(112px, 0.46fr) minmax(0, 1fr);
   gap: 10px;
 }
 
@@ -972,6 +1076,40 @@ h3 {
 .detail-list dd {
   margin: 0;
   font-weight: 650;
+}
+
+.meta-line {
+  display: block;
+  margin-top: 2px;
+}
+
+.details-button {
+  width: fit-content;
+  margin-top: 16px;
+}
+
+.source-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.source-list div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.source-list dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.source-list dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-weight: 750;
 }
 
 .detail-list.compact dt,
@@ -1111,6 +1249,7 @@ h3 {
   min-height: 32px;
   align-items: center;
   padding: 0 12px;
+  border: 0;
   border-radius: 6px;
   color: #0b7b3a;
   background: var(--green-soft);
@@ -1119,13 +1258,26 @@ h3 {
   white-space: nowrap;
 }
 
+.risk-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-status-card,
+.basic-info-card,
+.data-source-card,
+.risk-card {
+  align-self: stretch;
+}
+
 .metric-tile {
   display: grid;
-  min-height: 104px;
-  gap: 8px;
-  align-content: center;
+  min-height: 102px;
+  gap: 7px;
+  align-content: start;
+  align-items: start;
   justify-items: start;
-  padding: 14px;
+  padding: 12px;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: #fff;
@@ -1144,6 +1296,22 @@ h3 {
 
 .metric-tile strong {
   font-size: 16px;
+}
+
+.product-list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding-left: 14px;
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.metric-tile small {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 750;
 }
 
 .tile-icon {
@@ -1172,7 +1340,7 @@ h3 {
 .card-footer {
   display: flex;
   gap: 18px;
-  margin-top: 18px;
+  margin-top: 4px;
   padding-top: 12px;
   border-top: 1px solid var(--line);
   color: var(--muted);
@@ -1339,6 +1507,11 @@ tr:last-child td {
   align-self: start;
 }
 
+.left-rail .contracts-card,
+.left-rail .snapshot-card {
+  width: 100%;
+}
+
 .contracts-card .detail-list.compact {
   margin-bottom: 18px;
 }
@@ -1405,7 +1578,7 @@ tr:last-child td {
 
 .compliance-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(360px, 0.95fr) minmax(0, 1.05fr);
   gap: 18px;
 }
 
@@ -1423,7 +1596,7 @@ tr:last-child td {
 }
 
 .frameworks {
-  grid-template-columns: repeat(5, minmax(70px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
 }
 
 .policy-grid {
@@ -1434,6 +1607,7 @@ tr:last-child td {
 .policy-grid span {
   display: grid;
   align-content: center;
+  min-width: 0;
   min-height: 76px;
   gap: 8px;
   padding: 10px;
@@ -1442,7 +1616,13 @@ tr:last-child td {
   background: #fff;
   font-size: 12px;
   font-weight: 750;
+  overflow-wrap: anywhere;
   text-align: center;
+}
+
+.frameworks span {
+  align-content: center;
+  line-height: 1.25;
 }
 
 .policy-grid span {
@@ -2071,57 +2251,36 @@ tr:last-child td {
 
 @media (max-width: 1380px) and (min-width: 1181px) {
   .profile-hero {
-    grid-template-columns: minmax(285px, 0.95fr) minmax(0, 1.25fr) minmax(230px, 0.8fr);
+    grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1.1fr);
     grid-template-areas:
-      "head metrics health"
-      "risk risk owners";
+      "head metrics"
+      "owners owners";
     align-items: start;
   }
 
   .hero-metrics,
-  .risk-strip,
   .owner-strip {
     border: 1px solid var(--line);
-  }
-
-  .hero-metrics {
-    grid-template-columns:
-      minmax(44px, 0.48fr)
-      minmax(136px, 1.45fr)
-      minmax(78px, 0.82fr)
-      minmax(74px, 0.78fr);
-  }
-
-  .risk-strip {
-    padding-left: 0;
   }
 }
 
 @media (max-width: 1180px) {
   .profile-hero {
-    grid-template-columns: minmax(285px, 0.95fr) minmax(240px, 1fr) minmax(230px, 0.82fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "head health owners"
-      "metrics metrics risk";
+      "head"
+      "metrics"
+      "owners";
     align-items: start;
   }
 
   .hero-metrics,
-  .risk-strip,
   .owner-strip {
     border: 1px solid var(--line);
   }
 
   .hero-metrics {
-    grid-template-columns:
-      minmax(44px, 0.48fr)
-      minmax(136px, 1.45fr)
-      minmax(78px, 0.82fr)
-      minmax(74px, 0.78fr);
-  }
-
-  .risk-strip {
-    padding-left: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .owner-strip {
@@ -2132,21 +2291,39 @@ tr:last-child td {
     grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
   }
 
-  .account-status-card,
-  .contracts-card,
-  .snapshot-card {
+  .left-rail {
     grid-column: 1;
+    grid-row: 1 / 4;
   }
 
-  .basic-info-card,
+  .basic-info-card {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .data-source-card {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
   .risk-card {
     grid-column: 2;
+    grid-row: 3;
   }
 
-  .contacts-card,
-  .governance-card,
+  .contacts-card {
+    grid-column: 1 / -1;
+    grid-row: 4;
+  }
+
+  .governance-card {
+    grid-column: 1 / -1;
+    grid-row: 5;
+  }
+
   .systems-card {
     grid-column: 1 / -1;
+    grid-row: 6;
   }
 
   .governance-summary {
@@ -2226,22 +2403,23 @@ tr:last-child td {
   }
 
   .account-status-card,
+  .left-rail,
   .contracts-card,
   .snapshot-card,
   .basic-info-card,
+  .data-source-card,
   .risk-card,
   .contacts-card,
   .governance-card,
   .systems-card {
     grid-column: auto;
+    grid-row: auto;
   }
 
   .profile-hero {
     grid-template-areas:
       "head"
       "metrics"
-      "health"
-      "risk"
       "owners";
   }
 
@@ -2309,6 +2487,10 @@ tr:last-child td {
 
   .hero-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .metric-block.wide {
+    grid-column: auto;
   }
 
   .metric-block span,
