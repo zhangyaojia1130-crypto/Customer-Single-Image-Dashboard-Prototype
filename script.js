@@ -30,13 +30,15 @@ const icons = {
 
 const customers = {
   anxun: {
-    initials: "AC",
-    name: "Anxun Technology Co., Ltd.",
-    tier: "Tier 2",
-    industry: "Technology / Software",
+    initials: "MH",
+    name: "Marrilton Hotels",
+    overviewName: "Marrilton Hotels Global",
+    tier: "Tier 1 (Global Core KA)",
+    overviewTier: "Tie 1",
+    industry: "Hospitality / Hotel & Leisure",
     arr: "$2,640,000",
     expiration: "2026-12-31",
-    location: "New York, USA",
+    location: "Bethesda, Maryland, USA",
     score: 86,
     health: "Healthy",
     churn: "Low",
@@ -44,10 +46,10 @@ const customers = {
     nps: "42",
     executive: { name: "David Lee", email: "david.lee@derbysoft.net" },
     csm: { name: "Emma Wang", email: "emma.wang@derbysoft.net" },
-    customerId: "CUST-ANXUN-99875",
-    hq: "Beijing, China",
-    parent: "Anxun Group",
-    tags: ["Tier logo", "High Value", "SaaS", "AI"],
+    customerId: "CUST-MARRILTON-99875",
+    hq: "Bethesda, Maryland, USA",
+    parent: "Marrilton Worldwide Inc.",
+    tags: ["Global Strategic", "Luxury Brand", "Global Chain", "CRS Connected"],
     contacts: [
       {
         role: "Decision Maker",
@@ -55,7 +57,7 @@ const customers = {
         name: "David Lee",
         title: "CTO",
         influence: 5,
-        email: "david.lee@anxun.com",
+        email: "david.lee@marrilton.com",
         phone: "+86 138 0000 0001",
         im: "WeChat: davidlee",
         responsibility: "Technical decision owner and executive sponsor."
@@ -66,7 +68,7 @@ const customers = {
         name: "Jane Zhang",
         title: "Head of IT",
         influence: 5,
-        email: "jane.zhang@anxun.com",
+        email: "jane.zhang@marrilton.com",
         phone: "+86 139 0000 0002",
         im: "WhatsApp: jane.it",
         responsibility: "Key stakeholder for platform integration and delivery."
@@ -77,7 +79,7 @@ const customers = {
         name: "Michael Chen",
         title: "Product Manager",
         influence: 4,
-        email: "michael.chen@anxun.com",
+        email: "michael.chen@marrilton.com",
         phone: "+86 137 0000 0003",
         im: "WeChat: michaelchen",
         responsibility: "Drives daily operational coordination."
@@ -88,7 +90,7 @@ const customers = {
         name: "Emma Wang",
         title: "Finance Director",
         influence: 5,
-        email: "emma.wang@anxun.com",
+        email: "emma.wang@marrilton.com",
         phone: "+86 136 0000 0004",
         im: "WeChat: emmawang",
         responsibility: "Budget owner and renewal approval authority."
@@ -307,7 +309,6 @@ function renderIdentityTags(tags) {
   container.innerHTML = tags
     .map((tag, index) => `<span class="tag ${colors[index] || "gray"}">${escapeHtml(tag)}</span>`)
     .join("");
-  container.insertAdjacentHTML("beforeend", '<button class="tag add-tag" data-drawer="tags">+2</button>');
 }
 
 function renderInfluence(value) {
@@ -358,8 +359,8 @@ function renderCustomer(key, options = {}) {
   currentCustomerKey = key;
   const customer = getCustomer();
   setText("customerInitials", customer.initials);
-  setText("customerName", customer.name);
-  setText("customerTier", customer.tier);
+  setText("customerName", customer.overviewName || customer.name);
+  setText("customerTier", customer.overviewTier || customer.tier);
   setText("customerIndustry", customer.industry);
   setText("customerArr", customer.arr);
   setText("customerExpiration", customer.expiration);
@@ -467,18 +468,18 @@ function drawerTemplate(type, payload = {}) {
   const firstContact = customer.contacts[0];
   const contact = payload.contact || firstContact;
   const ecosystemLabels = {
-    group: "Anxun Group",
-    customer: "Anxun Technology Co., Ltd.",
+    group: "Marrilton Worldwide Inc.",
+    customer: "Marrilton Hotels Global",
     pkfare: "PKFARE",
     derbysoft: "DerbySoft",
     go: "GO",
     exchange: "Exchange",
     bts: "BTS",
-    beijing: "Beijing Regional Branch",
-    shanghai: "Shanghai Regional Branch",
-    shenzhen: "Shenzhen Regional Branch",
-    suzhou: "Suzhou Subsidiary Co., Ltd.",
-    reseller: "Reseller Routing",
+    beijing: "Marrilton North America",
+    shanghai: "Marrilton Asia Pacific",
+    shenzhen: "Marrilton Europe, Middle East & Africa",
+    suzhou: "Marrilton Resort & Spa - Bali",
+    reseller: "Distribution & Access Model",
     tier: "Governance Tier",
     billing: "Billing Model",
     products: "Products / Services",
@@ -555,7 +556,7 @@ function drawerTemplate(type, payload = {}) {
           <h3>Human oversight</h3>
           <div class="drawer-card">
             <strong>Primary Data Steward</strong>
-            <p>Jane Zhang owns exception review, duplicate merge approval, and security review scheduling.</p>
+            <p>Sarah Jenkins owns global distribution governance, guest-data controls, and hierarchy exception review.</p>
           </div>
         </section>
         <div class="drawer-actions">
@@ -706,7 +707,7 @@ function drawerTemplate(type, payload = {}) {
       body: `
         <section class="drawer-section">
           <ul class="drawer-list">
-            <li>MSA_Anxun_2021.pdf · verified</li>
+            <li>MSA_Marrilton_2021.pdf · verified</li>
             <li>API_Addendum_2024.pdf · verified</li>
             <li>Security_Review_2025.pdf · next review 2025-08-28</li>
           </ul>
@@ -720,7 +721,7 @@ function drawerTemplate(type, payload = {}) {
         <section class="drawer-section">
           <h3>Network role</h3>
           <ul class="drawer-list">
-            <li>Anxun acts as the customer company at the center of group companies, products, departments, and contacts.</li>
+            <li>Marrilton Hotels Global acts as the customer brand entity at the center of group companies, products, departments, and contacts.</li>
             <li>14 active relationships connect 4 group companies, 6 products / services, 6 departments, and 5 contacts.</li>
             <li>RevenueSync is currently degraded and should be reviewed before executive reporting.</li>
           </ul>
@@ -738,9 +739,9 @@ function drawerTemplate(type, payload = {}) {
         <section class="drawer-section">
           <h3>Hierarchy context</h3>
           <ul class="drawer-list">
-            <li>Belongs to the Anxun Group hierarchy and inherits enterprise governance rules.</li>
-            <li>Regional branches are connected to products through managed data-routing relationships.</li>
-            <li>Parent and subsidiary identifiers are used to keep billing, service, and ownership views aligned.</li>
+            <li>Belongs to the Marrilton Worldwide Inc. hierarchy and inherits brand-level governance rules.</li>
+            <li>Regional divisions are connected to products through direct API and GDS distribution relationships.</li>
+            <li>Parent, brand, region, and property identifiers keep billing, service, and ownership views aligned.</li>
           </ul>
         </section>
         <div class="drawer-actions">
@@ -869,9 +870,10 @@ function drawerTemplate(type, payload = {}) {
       body: `
         <section class="drawer-section">
           <div class="theme-cloud">
-            <span>Strategic</span>
-            <span>High Value</span>
-            <span>SaaS</span>
+            <span>Global Strategic</span>
+            <span>Luxury Brand</span>
+            <span>Global Chain</span>
+            <span>CRS Connected</span>
             <span>Renewal Window</span>
             <span>GDN Provider</span>
             <span>Executive Sponsor</span>
