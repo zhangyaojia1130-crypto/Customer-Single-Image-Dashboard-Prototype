@@ -1118,7 +1118,8 @@ function wireEvents() {
   document.getElementById("addContactButton").addEventListener("click", openModal);
   document.getElementById("closeModal").addEventListener("click", closeModal);
   document.getElementById("cancelModal").addEventListener("click", closeModal);
-  document.getElementById("updateButton").addEventListener("click", updateTimestamps);
+  const updateButton = document.getElementById("updateButton");
+  if (updateButton) updateButton.addEventListener("click", updateTimestamps);
   document.getElementById("syncButton").addEventListener("click", () => {
     syncMatrix();
     openDrawer("sync");
