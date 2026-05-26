@@ -58,7 +58,7 @@ const customers = {
         title: "CTO",
         influence: 5,
         email: "david.sterling@marrilton.com",
-        phone: "+86 138 0000 0001",
+        phone: "+1 (202) 555-0198",
         im: "Teams: david.sterling",
         responsibility: "Technical decision owner and executive sponsor."
       },
@@ -69,7 +69,7 @@ const customers = {
         title: "Head of IT",
         influence: 5,
         email: "jane.gallagher@marrilton.com",
-        phone: "+86 139 0000 0002",
+        phone: "+1 (301) 555-0721",
         im: "Teams: jane.gallagher",
         responsibility: "Key stakeholder for platform integration and delivery."
       },
@@ -80,7 +80,7 @@ const customers = {
         title: "Product Manager",
         influence: 4,
         email: "michael.oconnor@marrilton.com",
-        phone: "+86 137 0000 0003",
+        phone: "+44 (0) 7700 900461",
         im: "Teams: michael.oconnor",
         responsibility: "Drives daily operational coordination."
       },
@@ -91,7 +91,7 @@ const customers = {
         title: "Finance Director",
         influence: 5,
         email: "emma.kensington@marrilton.com",
-        phone: "+86 136 0000 0004",
+        phone: "+1 (301) 555-0143",
         im: "Teams: emma.kensington",
         responsibility: "Budget owner and renewal approval authority."
       }
@@ -513,7 +513,15 @@ function drawerTemplate(type, payload = {}) {
     revenuesync: "RevenueSync",
     partnernet: "PartnerNet Connector"
   };
+  const ecosystemContactPhones = {
+    lily: "+1 (415) 555-0456",
+    kevin: "+65 8123 4567",
+    jason: "+1 (301) 555-0882",
+    "emma-contact": "+1 (301) 555-0143",
+    "david-contact": "+1 (202) 555-0198"
+  };
   const ecosystemLabel = ecosystemLabels[payload.focus] || "Selected Ecosystem Entity";
+  const ecosystemPhone = ecosystemContactPhones[payload.focus];
   const templates = {
     profile: {
       kicker: "Customer Single Image",
@@ -781,6 +789,13 @@ function drawerTemplate(type, payload = {}) {
       kicker: "Customer Contact",
       title: ecosystemLabel,
       body: `
+        ${
+          ecosystemPhone
+            ? `<section class="drawer-section">
+          <div class="drawer-card"><strong>Phone</strong><p>${escapeHtml(ecosystemPhone)}</p></div>
+        </section>`
+            : ""
+        }
         <section class="drawer-section">
           <h3>Relationship path</h3>
           <ul class="drawer-list">
