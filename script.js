@@ -198,6 +198,27 @@ let currentCustomerKey = "anxun";
 let demoTimer = null;
 let demoIndex = 0;
 
+const gdnLinks = [
+  ["pkfare", "go", "link-blue"],
+  ["pkfare", "exchange", "link-blue"],
+  ["derbysoft", "exchange", "link-blue"],
+  ["derbysoft", "bts", "link-blue"],
+  ["go", "customer", "link-green"],
+  ["exchange", "customer", "link-green"],
+  ["bts", "customer", "link-green"],
+  ["customer", "it-team", "link-orange"],
+  ["customer", "data-office", "link-orange"],
+  ["customer", "ops-team", "link-orange"],
+  ["customer", "procurement", "link-orange"],
+  ["customer", "finance-team", "link-orange"],
+  ["customer", "security-team", "link-orange"],
+  ["it-team", "lily", "link-purple"],
+  ["ops-team", "kevin", "link-purple"],
+  ["procurement", "jason", "link-purple"],
+  ["finance-team", "emma-contact", "link-purple"],
+  ["security-team", "david-contact", "link-purple"]
+];
+
 const demoSteps = [
   {
     id: "profile",
@@ -358,6 +379,9 @@ function renderCustomer(key, options = {}) {
   setText("infoHq", customer.hq);
   setText("infoParent", customer.parent);
   setText("infoLocation", customer.location || customer.hq);
+  setText("heroHealthScore", customer.score);
+  const heroHealthRing = document.getElementById("heroHealthRing");
+  if (heroHealthRing) heroHealthRing.style.setProperty("--score", customer.score);
   const scoreRing = document.getElementById("scoreRing");
   if (scoreRing) scoreRing.style.setProperty("--score", customer.score);
   renderTags("heroTags", customer.tags);
@@ -372,6 +396,49 @@ function showDomain(domain) {
   });
   document.querySelectorAll(".domain-panel").forEach((panel) => {
     panel.classList.toggle("active", panel.dataset.domainPanel === domain);
+  });
+  window.requestAnimationFrame(renderGdnLinks);
+}
+
+function setEcosystemFocus(focus) {
+  const panel = document.querySelector('[data-domain-panel="ecosystem"]');
+  if (!panel || !focus) return;
+  panel.querySelectorAll(".ecosystem-focus").forEach((item) => item.classList.remove("ecosystem-focus"));
+  const targets = panel.querySelectorAll(`[data-ecosystem-focus-target="${focus}"]`);
+  targets.forEach((item) => item.classList.add("ecosystem-focus"));
+}
+
+function renderGdnLinks() {
+  const map = document.querySelector(".gdn-flow-map");
+  const layer = document.querySelector(".gdn-link-layer");
+  if (!map || !layer || !map.closest(".domain-panel.active")) return;
+  const mapRect = map.getBoundingClientRect();
+  if (!mapRect.width || !mapRect.height) return;
+  layer.setAttribute("viewBox", `0 0 ${mapRect.width} ${mapRect.height}`);
+  layer.innerHTML = "";
+
+  const pointFor = (id, side) => {
+    const element = map.querySelector(`[data-ecosystem-focus-target="${id}"]`);
+    if (!element) return null;
+    const rect = element.getBoundingClientRect();
+    return {
+      x: side === "left" ? rect.left - mapRect.left : rect.right - mapRect.left,
+      y: rect.top - mapRect.top + rect.height / 2
+    };
+  };
+
+  gdnLinks.forEach(([from, to, className]) => {
+    const start = pointFor(from, "right");
+    const end = pointFor(to, "left");
+    if (!start || !end) return;
+    const curve = Math.max(36, Math.abs(end.x - start.x) * 0.45);
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute(
+      "d",
+      `M ${start.x.toFixed(1)} ${start.y.toFixed(1)} C ${(start.x + curve).toFixed(1)} ${start.y.toFixed(1)}, ${(end.x - curve).toFixed(1)} ${end.y.toFixed(1)}, ${end.x.toFixed(1)} ${end.y.toFixed(1)}`
+    );
+    path.setAttribute("class", className);
+    layer.appendChild(path);
   });
 }
 
@@ -399,6 +466,53 @@ function drawerTemplate(type, payload = {}) {
   const customer = getCustomer();
   const firstContact = customer.contacts[0];
   const contact = payload.contact || firstContact;
+  const ecosystemLabels = {
+    group: "Anxun Group",
+    customer: "Anxun Technology Co., Ltd.",
+    pkfare: "PKFARE",
+    derbysoft: "DerbySoft",
+    go: "GO",
+    exchange: "Exchange",
+    bts: "BTS",
+    beijing: "Beijing Regional Branch",
+    shanghai: "Shanghai Regional Branch",
+    shenzhen: "Shenzhen Regional Branch",
+    suzhou: "Suzhou Subsidiary Co., Ltd.",
+    reseller: "Reseller Routing",
+    tier: "Governance Tier",
+    billing: "Billing Model",
+    products: "Products / Services",
+    departments: "Customer Departments",
+    contacts: "Customer Contacts",
+    relationships: "Active Relationships",
+    scholarship: "Scholarship Platform",
+    "identity-gateway": "Identity Gateway",
+    "data-insight": "Data Insight Suite",
+    "api-service": "API Integration Service",
+    "managed-support": "Managed Support",
+    monitoring: "Real-time Monitoring Service",
+    "it-team": "IT Team",
+    "data-office": "Data Office",
+    "ops-team": "Operations Team",
+    procurement: "Procurement",
+    "finance-team": "Finance",
+    "security-team": "Security Team",
+    lily: "Lily Wang",
+    kevin: "Kevin Sun",
+    jason: "Jason Li",
+    "emma-contact": "Emma Wang",
+    "david-contact": "David Lee",
+    connections: "Active Connections",
+    vendor: "TravelHub Global",
+    traffic: "Network Traffic Volume",
+    booking: "Estimated Booking Volume",
+    travelhub: "TravelHub Global",
+    skylane: "SkyLane PMS",
+    skylink: "SkyLink GDS",
+    revenuesync: "RevenueSync",
+    partnernet: "PartnerNet Connector"
+  };
+  const ecosystemLabel = ecosystemLabels[payload.focus] || "Selected Ecosystem Entity";
   const templates = {
     profile: {
       kicker: "Customer Single Image",
@@ -601,14 +715,108 @@ function drawerTemplate(type, payload = {}) {
     },
     ecosystem: {
       kicker: "Ecosystem & Topology",
-      title: "Connected Entity Context",
+      title: "GDN Network Footprint",
       body: `
         <section class="drawer-section">
           <h3>Network role</h3>
           <ul class="drawer-list">
-            <li>Acts as both data provider and data consumer in GDN.</li>
-            <li>48 active entity connections create measurable network value.</li>
-            <li>CloudStay node is the current operational watch item.</li>
+            <li>Anxun acts as the customer company at the center of group companies, products, departments, and contacts.</li>
+            <li>14 active relationships connect 4 group companies, 6 products / services, 6 departments, and 5 contacts.</li>
+            <li>RevenueSync is currently degraded and should be reviewed before executive reporting.</li>
+          </ul>
+        </section>
+        <section class="drawer-section">
+          <h3>Current focus</h3>
+          <div class="drawer-card">${escapeHtml(ecosystemLabel)} is mapped into the GDN topology with governed relationship ownership.</div>
+        </section>
+      `
+    },
+    "ecosystem-company": {
+      kicker: "Ecosystem & Topology",
+      title: ecosystemLabel,
+      body: `
+        <section class="drawer-section">
+          <h3>Hierarchy context</h3>
+          <ul class="drawer-list">
+            <li>Belongs to the Anxun Group hierarchy and inherits enterprise governance rules.</li>
+            <li>Regional branches are connected to products through managed data-routing relationships.</li>
+            <li>Parent and subsidiary identifiers are used to keep billing, service, and ownership views aligned.</li>
+          </ul>
+        </section>
+        <div class="drawer-actions">
+          <button class="primary-button" data-demo-step="sync">Check Sources</button>
+        </div>
+      `
+    },
+    "ecosystem-product": {
+      kicker: "Products / Services",
+      title: ecosystemLabel,
+      body: `
+        <section class="drawer-section">
+          <h3>Service role</h3>
+          <ul class="drawer-list">
+            <li>Connected to the customer company through the governed GDN service layer.</li>
+            <li>Supports routing, monitoring, identity, or analytics capabilities used by downstream departments.</li>
+            <li>Relationship impact is counted in product/service coverage and active relationship totals.</li>
+          </ul>
+        </section>
+      `
+    },
+    "ecosystem-department": {
+      kicker: "Customer Department / Service Object",
+      title: ecosystemLabel,
+      body: `
+        <section class="drawer-section">
+          <h3>Served-by relationship</h3>
+          <ul class="drawer-list">
+            <li>Receives services from the customer company and connected GDN products.</li>
+            <li>Department ownership clarifies handoff, issue routing, and approval responsibility.</li>
+            <li>Mapped contacts provide the human path for operational follow-up.</li>
+          </ul>
+        </section>
+      `
+    },
+    "ecosystem-contact": {
+      kicker: "Customer Contact",
+      title: ecosystemLabel,
+      body: `
+        <section class="drawer-section">
+          <h3>Relationship path</h3>
+          <ul class="drawer-list">
+            <li>Linked to one or more customer departments in the GDN relationship graph.</li>
+            <li>Used by sales, success, support, and AI workflows to route the right next action.</li>
+            <li>Contact responsibility is visible in the broader stakeholder DNA layer.</li>
+          </ul>
+        </section>
+        <div class="drawer-actions">
+          <button class="outline-button" data-demo-step="contacts">Open Stakeholders</button>
+        </div>
+      `
+    },
+    "ecosystem-node": {
+      kicker: "Connected Entity",
+      title: ecosystemLabel,
+      body: `
+        <section class="drawer-section">
+          <h3>Node health</h3>
+          <ul class="drawer-list">
+            <li>Live node telemetry includes error rate, latency, scan recency, and 24-hour connection volume.</li>
+            <li>Healthy nodes can be used for preferred routing and network expansion decisions.</li>
+            <li>Degraded nodes should trigger support review before high-volume traffic is routed through them.</li>
+          </ul>
+        </section>
+      `
+    },
+    "ecosystem-classification": {
+      kicker: "Strategic Network Classification",
+      title: ecosystemLabel,
+      body: `
+        <section class="drawer-section">
+          <h3>Classification logic</h3>
+          <ul class="drawer-list">
+            <li>Strategy flags describe network value, executive visibility, traffic commitments, and preferred routing.</li>
+            <li>Priority controls review cadence and escalation paths for ecosystem operations.</li>
+            <li>These classifications are intended to support explainable AI recommendations.</li>
           </ul>
         </section>
       `
@@ -918,7 +1126,10 @@ function wireEvents() {
   document.getElementById("exportButton").addEventListener("click", exportContacts);
   document.getElementById("autoDemoButton").addEventListener("click", toggleAutoDemo);
   window.addEventListener("scroll", updateInsightsDockDensity, { passive: true });
-  window.addEventListener("resize", updateInsightsDockDensity);
+  window.addEventListener("resize", () => {
+    updateInsightsDockDensity();
+    renderGdnLinks();
+  });
 
   document.getElementById("contactForm").addEventListener("submit", (event) => {
     event.preventDefault();
@@ -941,7 +1152,9 @@ function wireEvents() {
   document.addEventListener("click", (event) => {
     const drawerButton = event.target.closest("[data-drawer]");
     if (drawerButton) {
-      openDrawer(drawerButton.dataset.drawer);
+      const focus = drawerButton.dataset.ecosystemFocus;
+      if (focus) setEcosystemFocus(focus);
+      openDrawer(drawerButton.dataset.drawer, { focus });
       return;
     }
 
@@ -1001,3 +1214,4 @@ mountIcons();
 wireEvents();
 renderCustomer("anxun", { silent: true });
 updateInsightsDockDensity();
+renderGdnLinks();
