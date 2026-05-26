@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Customer Single-Image Dashboard Prototype</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="styles.css?v=21" />
   </head>
   <body>
     <div class="app-shell">
@@ -291,10 +291,9 @@
 
               <article class="panel basic-info-card" data-hotspot="basic">
                 <div class="panel-title">
-                  <h2>Basic Information</h2>
-                  <div class="title-actions">
+                  <div>
+                    <h2>Basic Information</h2>
                     <span class="updated-copy">Last updated: <span class="last-updated">2025-06-21 11:45</span></span>
-                    <button class="outline-button" id="updateButton">Update</button>
                   </div>
                 </div>
                 <div class="subtabs">
@@ -400,7 +399,10 @@
 
               <article class="panel data-source-card" data-hotspot="data-source">
                 <div class="panel-title">
-                  <h2>Data Source</h2>
+                  <div>
+                    <h2>Data Source</h2>
+                    <span class="updated-copy">Last updated: 2026-05-21 11:03</span>
+                  </div>
                 </div>
                 <dl class="source-list">
                   <div>
@@ -1349,6 +1351,6 @@
 
     <div class="toast-root" id="toastRoot" aria-live="polite"></div>
 
-    <script src="./script.js"></script>
+    <script src="script.js?v=21"></script>
   </body>
 </html>
