@@ -932,9 +932,7 @@ h3 {
   min-height: 142px;
   padding: 10px 6px 0;
   border-radius: 6px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(18, 164, 84, 0.04) 100%),
-    #fbfffd;
+  background: #fff;
 }
 
 .status-line-chart svg {
@@ -944,7 +942,7 @@ h3 {
 }
 
 .chart-band {
-  fill: rgba(18, 164, 84, 0.035);
+  fill: transparent;
 }
 
 .chart-grid-line {
@@ -960,7 +958,7 @@ h3 {
 }
 
 .chart-area {
-  fill: url("#statusAreaGradient");
+  fill: transparent;
 }
 
 .chart-line {
@@ -968,11 +966,12 @@ h3 {
   stroke: var(--green);
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 4.5;
+  stroke-width: 2.5;
   filter: drop-shadow(0 2px 2px rgba(18, 164, 84, 0.16));
 }
 
 .chart-dot {
+  display: none;
   fill: #fff;
   stroke: var(--green);
   stroke-width: 3;
@@ -1575,12 +1574,16 @@ tr:last-child td {
 }
 
 .mini-score {
+  --score: 86;
+
   display: grid;
   width: 36px;
   height: 36px;
   place-items: center;
-  border: 3px solid var(--green);
   border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #fff 0 58%, transparent 60%),
+    conic-gradient(var(--green) calc(var(--score) * 1%), #edf1f6 0);
   color: var(--text);
   font-weight: 800;
 }
@@ -1651,6 +1654,7 @@ tr:last-child td {
 .frameworks span {
   align-content: center;
   line-height: 1.25;
+  text-align: left;
 }
 
 .policy-grid span {
@@ -1892,7 +1896,28 @@ tr:last-child td {
 }
 
 .hierarchy-root {
-  width: min(520px, 100%);
+  width: min(390px, 100%);
+}
+
+.hierarchy-parent {
+  border-color: var(--blue);
+  background: linear-gradient(180deg, #f7fbff 0%, #fff 100%);
+  box-shadow:
+    0 0 0 3px rgba(15, 104, 255, 0.12),
+    0 12px 24px rgba(15, 104, 255, 0.14);
+}
+
+.hierarchy-parent::after {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 3px rgba(15, 104, 255, 0.18);
+  content: "";
 }
 
 .hierarchy-node > .nav-icon,
@@ -1920,9 +1945,10 @@ tr:last-child td {
 
 .hierarchy-tags {
   display: grid;
-  grid-template-columns: repeat(2, max-content);
-  justify-content: center;
+  grid-template-columns: 1fr;
+  justify-content: stretch;
   gap: 6px;
+  width: 100%;
   margin-top: 4px;
 }
 
@@ -1945,8 +1971,10 @@ tr:last-child td {
 }
 
 .hierarchy-tags span {
+  justify-content: flex-start;
   white-space: nowrap;
   overflow-wrap: normal;
+  text-align: left;
 }
 
 .hierarchy-branches {
@@ -2173,11 +2201,15 @@ tr:last-child td {
 }
 
 .product-card {
+  display: flex;
+  align-items: center;
   border-color: #90dbad;
   background: #fbfffd;
 }
 
 .department-card {
+  display: flex;
+  align-items: center;
   border-color: #ffc39f;
   background: #fffaf6;
 }
@@ -2293,18 +2325,18 @@ tr:last-child td {
 
 .network-classification-card th:last-child,
 .network-classification-card td:last-child {
-  text-align: right;
+  text-align: left;
 }
 
 .network-classification-card td.row-actions {
   display: table-cell;
-  text-align: right;
+  text-align: left;
   white-space: nowrap;
 }
 
 .network-classification-card td.row-actions .icon-button {
   display: inline-grid;
-  margin-left: 4px;
+  margin-right: 4px;
   vertical-align: middle;
 }
 
