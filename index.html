@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Customer Single-Image Dashboard Prototype</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="styles.css?v=21" />
   </head>
   <body>
     <div class="app-shell">
@@ -137,9 +137,10 @@
                 <span>Location</span>
                 <strong id="infoLocation">New York, USA</strong>
               </div>
-              <div class="metric-block wide muted-block">
-                <span>Last updated</span>
-                <strong class="last-updated">2025-06-21 11:24</strong>
+              <div class="metric-block wide health-metric">
+                <span class="hero-health-ring" id="heroHealthRing" style="--score: 86">
+                  <strong id="heroHealthScore">86</strong>
+                </span>
               </div>
             </div>
 
@@ -695,53 +696,379 @@
           </section>
 
           <section class="domain-panel" data-domain-panel="ecosystem">
-            <div class="domain-dashboard two-column">
-              <article class="panel wide" data-hotspot="ecosystem-map">
+            <div class="ecosystem-grid">
+              <article class="panel ecosystem-hierarchy-card" data-hotspot="ecosystem-hierarchy">
                 <div class="panel-title">
-                  <h2>Ecosystem &amp; Commercial Roles</h2>
+                  <h2>Hierarchy Mapping</h2>
+                  <span class="updated-copy">Last updated: 2025-05-15 09:42</span>
+                </div>
+
+                <div class="hierarchy-map" aria-label="Hierarchy mapping">
+                  <button class="hierarchy-node hierarchy-root" data-drawer="ecosystem-company" data-ecosystem-focus="group">
+                    <span class="nav-icon" data-icon="data"></span>
+                    <strong>Anxun Group</strong>
+                    <small>ID: PGGA0012164</small>
+                    <span class="hierarchy-tags">
+                      <span>Location: Shanghai, China</span>
+                      <span>Segment: Enterprise Group</span>
+                    </span>
+                  </button>
+                  <button class="hierarchy-node hierarchy-parent" data-drawer="ecosystem-company" data-ecosystem-focus="customer">
+                    <span class="nav-icon" data-icon="data"></span>
+                    <strong>Anxun Technology Co., Ltd.</strong>
+                    <small>Level 1 · Parent Company</small>
+                    <small>ID: PGGA0012163</small>
+                  </button>
+                  <div class="hierarchy-branches">
+                    <button class="branch-node" data-drawer="ecosystem-company" data-ecosystem-focus="beijing">
+                      <span class="nav-icon" data-icon="data"></span>
+                      <strong>Beijing Regional Branch</strong>
+                      <small>Level 2 · Regional Branch</small>
+                      <small>ID: PGGBJ0012181</small>
+                      <span>Location: Beijing, China</span>
+                      <span>Segment: Public Sector</span>
+                    </button>
+                    <button class="branch-node" data-drawer="ecosystem-company" data-ecosystem-focus="shanghai">
+                      <span class="nav-icon" data-icon="data"></span>
+                      <strong>Shanghai Regional Branch</strong>
+                      <small>Level 2 · Regional Branch</small>
+                      <small>ID: PGGSH0012182</small>
+                      <span>Location: Shanghai, China</span>
+                      <span>Segment: Financial Services</span>
+                    </button>
+                    <button class="branch-node" data-drawer="ecosystem-company" data-ecosystem-focus="shenzhen">
+                      <span class="nav-icon" data-icon="data"></span>
+                      <strong>Shenzhen Regional Branch</strong>
+                      <small>Level 2 · Regional Branch</small>
+                      <small>ID: PGGSZ0012183</small>
+                      <span>Location: Shenzhen, China</span>
+                      <span>Segment: High Tech</span>
+                    </button>
+                    <button class="branch-node" data-drawer="ecosystem-company" data-ecosystem-focus="suzhou">
+                      <span class="nav-icon" data-icon="data"></span>
+                      <strong>Suzhou Subsidiary Co., Ltd.</strong>
+                      <small>Level 2 · Subsidiary</small>
+                      <small>ID: PGGSZ0012185</small>
+                      <span>Location: Suzhou, China</span>
+                      <span>Segment: Manufacturing</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="hierarchy-meta-grid">
+                  <button data-drawer="ecosystem-company" data-ecosystem-focus="reseller">
+                    <span class="nav-icon" data-icon="sync"></span>
+                    <span>Through Reseller</span>
+                    <strong>Yes</strong>
+                  </button>
+                  <button data-drawer="ecosystem-company" data-ecosystem-focus="group">
+                    <span class="nav-icon" data-icon="customer"></span>
+                    <span>Parent ID</span>
+                    <strong>PGGA0012164</strong>
+                  </button>
+                  <button data-drawer="ecosystem-classification" data-ecosystem-focus="tier">
+                    <span class="nav-icon" data-icon="network"></span>
+                    <span>Governance Tier</span>
+                    <strong>Tier 3</strong>
+                  </button>
+                  <button data-drawer="ecosystem-classification" data-ecosystem-focus="billing">
+                    <span class="nav-icon" data-icon="card"></span>
+                    <span>Billing Model</span>
+                    <strong>Global Distribution Partner</strong>
+                  </button>
+                </div>
+              </article>
+
+              <article class="panel ecosystem-network-card" data-hotspot="ecosystem-map">
+                <div class="panel-title">
+                  <div>
+                    <h2>GDN Network Footprint &amp; Roles</h2>
+                    <div class="network-legend" aria-label="Network legend">
+                      <span class="legend-blue">Anxun Company</span>
+                      <span class="legend-green">Product</span>
+                      <span class="legend-solution">Service / Solution</span>
+                      <span class="legend-orange">Customer Department / Service Object</span>
+                      <span class="legend-purple">Customer Contact</span>
+                    </div>
+                  </div>
                   <button class="outline-button" data-drawer="ecosystem">Network View</button>
                 </div>
-                <div class="network-map">
-                  <button class="node primary-node">Anxun<br />CID 06078</button>
-                  <button class="node top">Anxun Group</button>
-                  <button class="node left">Reseller Partner</button>
-                  <button class="node right">GDN Vendor</button>
-                  <button class="node bottom">Tech Provider</button>
-                  <span class="edge e1"></span>
-                  <span class="edge e2"></span>
-                  <span class="edge e3"></span>
-                  <span class="edge e4"></span>
+
+                <div class="gdn-flow-map" aria-label="GDN network footprint">
+                  <div class="flow-stage">
+                    <h3>1. Our Group Companies</h3>
+                    <button class="flow-card company-card" data-drawer="ecosystem-company" data-ecosystem-focus="pkfare" data-ecosystem-focus-target="pkfare">
+                      <span class="nav-icon" data-icon="data"></span>
+                      <strong>PKFARE</strong>
+                      <small>Distribution Partner</small>
+                    </button>
+                    <button class="flow-card company-card" data-drawer="ecosystem-company" data-ecosystem-focus="derbysoft" data-ecosystem-focus-target="derbysoft">
+                      <span class="nav-icon" data-icon="data"></span>
+                      <strong>DerbySoft</strong>
+                      <small>GDN Platform</small>
+                    </button>
+                  </div>
+
+                  <div class="flow-stage">
+                    <h3>2. Products / Services</h3>
+                    <button class="flow-card product-card" data-drawer="ecosystem-product" data-ecosystem-focus="go" data-ecosystem-focus-target="go">
+                      <span class="nav-icon" data-icon="cube"></span>
+                      GO
+                    </button>
+                    <button class="flow-card product-card" data-drawer="ecosystem-product" data-ecosystem-focus="exchange" data-ecosystem-focus-target="exchange">
+                      <span class="nav-icon" data-icon="shield"></span>
+                      Exchange
+                    </button>
+                    <button class="flow-card product-card" data-drawer="ecosystem-product" data-ecosystem-focus="bts" data-ecosystem-focus-target="bts">
+                      <span class="nav-icon" data-icon="target"></span>
+                      BTS
+                    </button>
+                  </div>
+
+                  <div class="flow-center">
+                    <h3>3. Customer Company</h3>
+                    <button class="customer-hub" data-drawer="ecosystem-company" data-ecosystem-focus="customer" data-ecosystem-focus-target="customer">
+                      <span class="nav-icon" data-icon="data"></span>
+                      <strong>Anxun Technology<br />Co., Ltd.</strong>
+                    </button>
+                  </div>
+
+                  <div class="flow-stage">
+                    <h3>4. Customer Department / Service Object</h3>
+                    <button class="flow-card department-card" data-drawer="ecosystem-department" data-ecosystem-focus="it-team" data-ecosystem-focus-target="it-team">
+                      <span class="nav-icon" data-icon="settings"></span>
+                      IT Team
+                    </button>
+                    <button class="flow-card department-card" data-drawer="ecosystem-department" data-ecosystem-focus="data-office" data-ecosystem-focus-target="data-office">
+                      <span class="nav-icon" data-icon="data"></span>
+                      Data Office
+                    </button>
+                    <button class="flow-card department-card" data-drawer="ecosystem-department" data-ecosystem-focus="ops-team" data-ecosystem-focus-target="ops-team">
+                      <span class="nav-icon" data-icon="target"></span>
+                      Operations Team
+                    </button>
+                    <button class="flow-card department-card" data-drawer="ecosystem-department" data-ecosystem-focus="procurement" data-ecosystem-focus-target="procurement">
+                      <span class="nav-icon" data-icon="receipt"></span>
+                      Procurement
+                    </button>
+                    <button class="flow-card department-card" data-drawer="ecosystem-department" data-ecosystem-focus="finance-team" data-ecosystem-focus-target="finance-team">
+                      <span class="nav-icon" data-icon="card"></span>
+                      Finance
+                    </button>
+                    <button class="flow-card department-card" data-drawer="ecosystem-department" data-ecosystem-focus="security-team" data-ecosystem-focus-target="security-team">
+                      <span class="nav-icon" data-icon="shield"></span>
+                      Security Team
+                    </button>
+                  </div>
+
+                  <div class="flow-stage contacts-stage">
+                    <h3>5. Customer Contacts</h3>
+                    <button class="flow-card contact-card" data-drawer="ecosystem-contact" data-ecosystem-focus="lily" data-ecosystem-focus-target="lily">
+                      <span class="nav-icon" data-icon="person"></span>
+                      <strong>Lily Wang</strong>
+                      <small>CTO</small>
+                    </button>
+                    <button class="flow-card contact-card" data-drawer="ecosystem-contact" data-ecosystem-focus="kevin" data-ecosystem-focus-target="kevin">
+                      <span class="nav-icon" data-icon="person"></span>
+                      <strong>Kevin Sun</strong>
+                      <small>Operations</small>
+                    </button>
+                    <button class="flow-card contact-card" data-drawer="ecosystem-contact" data-ecosystem-focus="jason" data-ecosystem-focus-target="jason">
+                      <span class="nav-icon" data-icon="person"></span>
+                      <strong>Jason Li</strong>
+                      <small>Procurement</small>
+                    </button>
+                    <button class="flow-card contact-card" data-drawer="ecosystem-contact" data-ecosystem-focus="emma-contact" data-ecosystem-focus-target="emma-contact">
+                      <span class="nav-icon" data-icon="person"></span>
+                      <strong>Emma Wang</strong>
+                      <small>Finance Controller</small>
+                    </button>
+                    <button class="flow-card contact-card" data-drawer="ecosystem-contact" data-ecosystem-focus="david-contact" data-ecosystem-focus-target="david-contact">
+                      <span class="nav-icon" data-icon="person"></span>
+                      <strong>David Lee</strong>
+                      <small>CSO / Security Lead</small>
+                    </button>
+                  </div>
+
+                  <svg class="gdn-link-layer" aria-hidden="true"></svg>
+                </div>
+
+                <div class="network-summary-row">
+                  <button data-drawer="ecosystem-company" data-ecosystem-focus="group">
+                    <span class="nav-icon" data-icon="data"></span>
+                    <span>Group Companies</span>
+                    <strong>2</strong>
+                  </button>
+                  <button data-drawer="ecosystem-product" data-ecosystem-focus="products">
+                    <span class="nav-icon" data-icon="cube"></span>
+                    <span>Products / Services</span>
+                    <strong>3</strong>
+                  </button>
+                  <button data-drawer="ecosystem-department" data-ecosystem-focus="departments">
+                    <span class="nav-icon" data-icon="home"></span>
+                    <span>Customer Departments</span>
+                    <strong>6</strong>
+                  </button>
+                  <button data-drawer="ecosystem-contact" data-ecosystem-focus="contacts">
+                    <span class="nav-icon" data-icon="person"></span>
+                    <span>Customer Contacts</span>
+                    <strong>5</strong>
+                  </button>
+                  <button data-drawer="ecosystem" data-ecosystem-focus="relationships">
+                    <span class="nav-icon" data-icon="paperclip"></span>
+                    <span>Active Relationships</span>
+                    <strong>18</strong>
+                  </button>
                 </div>
               </article>
-              <article class="panel">
-                <h2>GDN Network Footprint</h2>
-                <div class="kpi-stack">
-                  <div><span>Active Connections</span><strong>48</strong></div>
-                  <div><span>YTD API Calls</span><strong>42.8M</strong></div>
-                  <div><span>Estimated Booking Volume</span><strong>$91.2M</strong></div>
-                </div>
-              </article>
-              <article class="panel wide">
+
+              <section class="connected-entities panel" data-hotspot="ecosystem-connected">
                 <div class="panel-title">
-                  <h2>Collaboration Node Details</h2>
-                  <span class="risk-badge">Gold Account</span>
+                  <h2>Connected Entities</h2>
+                  <span class="updated-copy">Last updated: 2025-05-15 09:42</span>
+                </div>
+                <div class="connected-metric-grid">
+                  <button data-drawer="ecosystem-node" data-ecosystem-focus="connections">
+                    <span class="tile-icon blue"><span class="nav-icon" data-icon="network"></span></span>
+                    <span>Active Connections Count</span>
+                    <strong>12</strong>
+                  </button>
+                  <button data-drawer="ecosystem-node" data-ecosystem-focus="vendor">
+                    <span class="tile-icon green"><span class="nav-icon" data-icon="data"></span></span>
+                    <span>Top Connected Vendor</span>
+                    <strong>TravelHub Global</strong>
+                  </button>
+                  <button data-drawer="ecosystem-node" data-ecosystem-focus="traffic">
+                    <span class="tile-icon violet"><span class="nav-icon" data-icon="network"></span></span>
+                    <span>Network Traffic Volume YTD</span>
+                    <strong>18.4M API Calls</strong>
+                  </button>
+                  <button data-drawer="ecosystem-node" data-ecosystem-focus="booking">
+                    <span class="tile-icon amber"><span class="nav-icon" data-icon="receipt"></span></span>
+                    <span>Estimated Booking Volume YTD</span>
+                    <strong>$42.8M</strong>
+                  </button>
+                </div>
+              </section>
+
+              <article class="panel active-node-card" data-hotspot="ecosystem-nodes">
+                <div class="panel-title">
+                  <h2>Active Node List</h2>
+                  <span class="updated-copy">Last updated: 2025-05-15 09:42</span>
                 </div>
                 <div class="table-wrap">
-                  <table>
+                  <table class="ecosystem-table">
                     <thead>
                       <tr>
-                        <th>Node</th>
-                        <th>Role</th>
-                        <th>Live Status</th>
-                        <th>Last Successful Sync</th>
-                        <th>Error Rate</th>
-                        <th>Latency</th>
+                        <th>Node ID</th>
+                        <th>Node Name</th>
+                        <th>Health Status</th>
+                        <th>Error Rate (24h)</th>
+                        <th>Avg Latency</th>
+                        <th>Last Scanned</th>
+                        <th>Conn. (24h)</th>
+                        <th>View</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr><td>JinTravel</td><td>Data Consumer</td><td><span class="pill success">Live</span></td><td>2026-05-19 08:42</td><td>0.08%</td><td>184 ms</td></tr>
-                      <tr><td>Nova PMS</td><td>System Provider</td><td><span class="pill success">Live</span></td><td>2026-05-19 08:39</td><td>0.12%</td><td>211 ms</td></tr>
-                      <tr><td>CloudStay</td><td>Data Provider</td><td><span class="pill warning">Watch</span></td><td>2026-05-19 07:58</td><td>1.9%</td><td>412 ms</td></tr>
+                      <tr>
+                        <td>NG-1901</td>
+                        <td>TravelHub Global</td>
+                        <td><span class="status-dot healthy"></span>Healthy / Live</td>
+                        <td>0.12%</td>
+                        <td>142 ms</td>
+                        <td>2025-05-15 09:28</td>
+                        <td>24</td>
+                        <td><button class="link-button" data-drawer="ecosystem-node" data-ecosystem-focus="travelhub">View</button></td>
+                      </tr>
+                      <tr>
+                        <td>NG-1902</td>
+                        <td>SkyLane PMS</td>
+                        <td><span class="status-dot healthy"></span>Healthy / Live</td>
+                        <td>1.21%</td>
+                        <td>208 ms</td>
+                        <td>2025-05-15 09:11</td>
+                        <td>8</td>
+                        <td><button class="link-button" data-drawer="ecosystem-node" data-ecosystem-focus="skylane">View</button></td>
+                      </tr>
+                      <tr>
+                        <td>NG-1903</td>
+                        <td>SkyLink GDS</td>
+                        <td><span class="status-dot healthy"></span>Healthy / Live</td>
+                        <td>0.07%</td>
+                        <td>135 ms</td>
+                        <td>2025-05-15 08:45</td>
+                        <td>9</td>
+                        <td><button class="link-button" data-drawer="ecosystem-node" data-ecosystem-focus="skylink">View</button></td>
+                      </tr>
+                      <tr>
+                        <td>NG-1904</td>
+                        <td>RevenueSync</td>
+                        <td><span class="status-dot degraded"></span>Degraded</td>
+                        <td>2.67%</td>
+                        <td>241 ms</td>
+                        <td>2025-05-15 08:12</td>
+                        <td>7</td>
+                        <td><button class="link-button" data-drawer="ecosystem-node" data-ecosystem-focus="revenuesync">View</button></td>
+                      </tr>
+                      <tr>
+                        <td>NG-1905</td>
+                        <td>PartnerNet Connector</td>
+                        <td><span class="status-dot healthy"></span>Healthy / Live</td>
+                        <td>0.11%</td>
+                        <td>210 ms</td>
+                        <td>2025-05-15 07:28</td>
+                        <td>1</td>
+                        <td><button class="link-button" data-drawer="ecosystem-node" data-ecosystem-focus="partnernet">View</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+
+              <article class="panel network-classification-card" data-hotspot="ecosystem-classification">
+                <div class="panel-title">
+                  <h2>Strategic Network Classification</h2>
+                  <span class="updated-copy">Last updated: 2025-05-15 09:42</span>
+                </div>
+                <div class="table-wrap">
+                  <table class="ecosystem-table">
+                    <thead>
+                      <tr>
+                        <th>Strategy Type</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="strategy-badge gold">Gold Access Flag</span></td>
+                        <td>High security ecosystem value and executive visibility</td>
+                        <td><span class="priority high">High</span></td>
+                        <td class="row-actions">
+                          <button class="icon-button" data-drawer="ecosystem-classification" aria-label="Edit gold access"><span class="nav-icon" data-icon="edit"></span></button>
+                          <button class="icon-button" data-drawer="ecosystem-classification" aria-label="View gold access"><span class="nav-icon" data-icon="more"></span></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="strategy-badge blue">Technical Traffic is Tier</span></td>
+                        <td>Premium SLA commitment for high-volume integration</td>
+                        <td><span class="priority medium">Medium</span></td>
+                        <td class="row-actions">
+                          <button class="icon-button" data-drawer="ecosystem-classification" aria-label="Edit technical traffic"><span class="nav-icon" data-icon="edit"></span></button>
+                          <button class="icon-button" data-drawer="ecosystem-classification" aria-label="View technical traffic"><span class="nav-icon" data-icon="more"></span></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="strategy-badge green">Preferred Distribution Node</span></td>
+                        <td>Recommended routing partner for stable booking flow</td>
+                        <td><span class="priority medium">Medium</span></td>
+                        <td class="row-actions">
+                          <button class="icon-button" data-drawer="ecosystem-classification" aria-label="Edit distribution node"><span class="nav-icon" data-icon="edit"></span></button>
+                          <button class="icon-button" data-drawer="ecosystem-classification" aria-label="View distribution node"><span class="nav-icon" data-icon="more"></span></button>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -1022,6 +1349,6 @@
 
     <div class="toast-root" id="toastRoot" aria-live="polite"></div>
 
-    <script src="./script.js"></script>
+    <script src="script.js?v=21"></script>
   </body>
 </html>
