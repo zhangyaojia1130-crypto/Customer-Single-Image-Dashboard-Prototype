@@ -31,7 +31,7 @@ const icons = {
 const customers = {
   anxun: {
     initials: "MH",
-    name: "Marrilton Hotels",
+    name: "Marrilton Hotels Global",
     overviewName: "Marrilton Hotels Global",
     tier: "Tier 1 (Global Core KA)",
     overviewTier: "Tie 1",
@@ -44,8 +44,8 @@ const customers = {
     churn: "Low",
     oes: "8.1 / 10",
     nps: "42",
-    executive: { name: "David Lee", email: "david.lee@derbysoft.net" },
-    csm: { name: "Emma Wang", email: "emma.wang@derbysoft.net" },
+    executive: { name: "David Sinclair", email: "david.sinclair@derbysoft.net" },
+    csm: { name: "Emma Rutherford", email: "emma.rutherford@marrilton.com" },
     customerId: "CUST-MARRILTON-99875",
     hq: "Bethesda, Maryland, USA",
     parent: "Marrilton Worldwide Inc.",
@@ -54,45 +54,45 @@ const customers = {
       {
         role: "Decision Maker",
         roleClass: "decision",
-        name: "David Lee",
+        name: "David Sterling",
         title: "CTO",
         influence: 5,
-        email: "david.lee@marrilton.com",
+        email: "david.sterling@marrilton.com",
         phone: "+86 138 0000 0001",
-        im: "WeChat: davidlee",
+        im: "Teams: david.sterling",
         responsibility: "Technical decision owner and executive sponsor."
       },
       {
         role: "IT & Technical Integration",
         roleClass: "tech",
-        name: "Jane Zhang",
+        name: "Jane Gallagher",
         title: "Head of IT",
         influence: 5,
-        email: "jane.zhang@marrilton.com",
+        email: "jane.gallagher@marrilton.com",
         phone: "+86 139 0000 0002",
-        im: "WhatsApp: jane.it",
+        im: "Teams: jane.gallagher",
         responsibility: "Key stakeholder for platform integration and delivery."
       },
       {
         role: "Operations & Admin",
         roleClass: "ops",
-        name: "Michael Chen",
+        name: "Michael O'Connor",
         title: "Product Manager",
         influence: 4,
-        email: "michael.chen@marrilton.com",
+        email: "michael.oconnor@marrilton.com",
         phone: "+86 137 0000 0003",
-        im: "WeChat: michaelchen",
+        im: "Teams: michael.oconnor",
         responsibility: "Drives daily operational coordination."
       },
       {
         role: "Finance & Billing",
         roleClass: "finance",
-        name: "Emma Wang",
+        name: "Emma Kensington",
         title: "Finance Director",
         influence: 5,
-        email: "emma.wang@marrilton.com",
+        email: "emma.kensington@marrilton.com",
         phone: "+86 136 0000 0004",
-        im: "WeChat: emmawang",
+        im: "Teams: emma.kensington",
         responsibility: "Budget owner and renewal approval authority."
       }
     ]
@@ -476,8 +476,8 @@ function drawerTemplate(type, payload = {}) {
     exchange: "Exchange",
     bts: "BTS",
     beijing: "Marrilton North America",
-    shanghai: "Marrilton Asia Pacific",
-    shenzhen: "Marrilton Europe, Middle East & Africa",
+    shanghai: "Marrilton Europe, Middle East & Africa",
+    shenzhen: "Marrilton Asia Pacific",
     suzhou: "Marrilton Resort & Spa - Bali",
     reseller: "Distribution & Access Model",
     tier: "Governance Tier",
@@ -498,11 +498,11 @@ function drawerTemplate(type, payload = {}) {
     procurement: "Procurement",
     "finance-team": "Finance",
     "security-team": "Security Team",
-    lily: "Lily Wang",
-    kevin: "Kevin Sun",
-    jason: "Jason Li",
-    "emma-contact": "Emma Wang",
-    "david-contact": "David Lee",
+    lily: "Lily Sterling-Hughes",
+    kevin: "Kevin Mitchell",
+    jason: "Jason Caldwell",
+    "emma-contact": "Emma Kensington",
+    "david-contact": "David Sterling",
     connections: "Active Connections",
     vendor: "TravelHub Global",
     traffic: "Network Traffic Volume",
@@ -556,7 +556,7 @@ function drawerTemplate(type, payload = {}) {
           <h3>Human oversight</h3>
           <div class="drawer-card">
             <strong>Primary Data Steward</strong>
-            <p>Sarah Jenkins owns global distribution governance, guest-data controls, and hierarchy exception review.</p>
+            <p>Jane Gallagher owns global distribution governance, guest-data controls, and hierarchy exception review.</p>
           </div>
         </section>
         <div class="drawer-actions">
@@ -600,7 +600,7 @@ function drawerTemplate(type, payload = {}) {
           <h3>Recommended sequence</h3>
           <ul class="drawer-list">
             <li>Start with ${escapeHtml(customer.executive.name)} for executive business case alignment.</li>
-            <li>Loop Jane Zhang into integration scope and CloudStay latency review.</li>
+            <li>Loop Jane Gallagher into integration scope and CloudStay latency review.</li>
             <li>Secure ${escapeHtml(customer.csm.name)} for renewal budget authority and auto-renewal timing.</li>
           </ul>
         </section>
@@ -828,9 +828,9 @@ function drawerTemplate(type, payload = {}) {
       body: `
         <section class="drawer-section">
           <ul class="drawer-list">
-            <li>David Lee: champion and executive sponsor.</li>
-            <li>Emma Wang: economic approver with renewal authority.</li>
-            <li>Jane Zhang: technical buyer and delivery gatekeeper.</li>
+            <li>David Sterling: champion and executive sponsor.</li>
+            <li>Emma Kensington: economic approver with renewal authority.</li>
+            <li>Jane Gallagher: technical buyer and delivery gatekeeper.</li>
           </ul>
         </section>
       `
