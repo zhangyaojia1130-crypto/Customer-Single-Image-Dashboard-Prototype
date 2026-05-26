@@ -522,6 +522,28 @@ h3 {
   background: #f3f7fd;
 }
 
+.health-metric {
+  justify-items: center;
+  padding: 4px;
+}
+
+.hero-health-ring {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #fff 0 58%, transparent 59%),
+    conic-gradient(var(--green) calc(var(--score) * 1%), #edf1f6 0);
+}
+
+.hero-health-ring strong {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 850;
+}
+
 .metric-block span,
 .risk-strip span,
 .owner-card span,
@@ -555,6 +577,12 @@ h3 {
 
 .metric-block:first-child strong {
   color: var(--blue);
+}
+
+.health-metric .hero-health-ring strong {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 850;
 }
 
 .health-summary {
@@ -1772,6 +1800,580 @@ tr:last-child td {
   transform: rotate(90deg);
 }
 
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.ecosystem-hierarchy-card,
+.ecosystem-network-card,
+.connected-entities,
+.active-node-card,
+.network-classification-card {
+  min-width: 0;
+}
+
+.ecosystem-hierarchy-card {
+  grid-column: 1;
+}
+
+.ecosystem-network-card {
+  grid-column: 1;
+  overflow-x: auto;
+}
+
+.connected-entities {
+  grid-column: 1;
+}
+
+.active-node-card {
+  grid-column: 1;
+}
+
+.network-classification-card {
+  grid-column: 1;
+}
+
+.hierarchy-map {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  min-height: 392px;
+  padding: 4px 0 0;
+}
+
+.hierarchy-map::before {
+  position: absolute;
+  top: 94px;
+  bottom: 136px;
+  left: 50%;
+  width: 1px;
+  background: #b9cdf7;
+  content: "";
+}
+
+.hierarchy-map::after {
+  position: absolute;
+  right: 72px;
+  bottom: 112px;
+  left: 72px;
+  height: 1px;
+  background: #b9cdf7;
+  content: "";
+}
+
+.hierarchy-node,
+.branch-node,
+.hierarchy-meta-grid button,
+.flow-card,
+.customer-hub,
+.network-summary-row button,
+.connected-metric-grid button {
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: #0f2e7a;
+  text-align: left;
+}
+
+.hierarchy-node,
+.branch-node {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 4px;
+  width: min(390px, 100%);
+  padding: 12px 14px 12px 46px;
+  box-shadow: 0 8px 18px rgba(15, 104, 255, 0.04);
+  overflow-wrap: anywhere;
+}
+
+.hierarchy-root {
+  width: min(520px, 100%);
+}
+
+.hierarchy-node > .nav-icon,
+.branch-node > .nav-icon {
+  position: absolute;
+  top: 17px;
+  left: 14px;
+  color: var(--blue);
+}
+
+.hierarchy-node strong,
+.branch-node strong {
+  color: #0758c8;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.hierarchy-node small,
+.branch-node small {
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.hierarchy-tags {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  justify-content: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.hierarchy-tags span,
+.branch-node span:not(.nav-icon) {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 26px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  border: 1px solid #c7d8ff;
+  border-radius: 6px;
+  color: #0758c8;
+  background: #fbfdff;
+  font-size: 11px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.hierarchy-tags span {
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+.hierarchy-branches {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(210px, 1fr));
+  gap: 10px;
+  width: 100%;
+  margin-top: 28px;
+}
+
+.branch-node {
+  width: 100%;
+  min-height: 128px;
+  padding: 12px 10px 10px 38px;
+}
+
+.branch-node > .nav-icon {
+  left: 10px;
+}
+
+.branch-node span:not(.nav-icon) {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.hierarchy-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.hierarchy-meta-grid button,
+.network-summary-row button,
+.connected-metric-grid button {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 4px 10px;
+  align-items: center;
+  min-width: 0;
+  padding: 12px;
+}
+
+.hierarchy-meta-grid button > .nav-icon,
+.network-summary-row button > .nav-icon {
+  grid-row: span 2;
+  color: var(--blue);
+}
+
+.hierarchy-meta-grid span,
+.network-summary-row span,
+.connected-metric-grid span {
+  color: #1e3a8a;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.hierarchy-meta-grid strong,
+.network-summary-row strong,
+.connected-metric-grid strong {
+  min-width: 0;
+  color: var(--text);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.network-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+  color: #1e3a8a;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.network-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.network-legend span::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  content: "";
+}
+
+.legend-blue::before {
+  background: var(--blue);
+}
+
+.legend-green::before,
+.legend-solution::before {
+  background: var(--green);
+}
+
+.legend-orange::before {
+  background: #ff6b1a;
+}
+
+.legend-purple::before {
+  background: var(--violet);
+}
+
+.gdn-flow-map {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.02fr 1.08fr 0.88fr 1.1fr 0.9fr;
+  gap: 24px;
+  width: 100%;
+  min-width: 1120px;
+  min-height: 410px;
+  overflow: hidden;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(15, 104, 255, 0.06), transparent 22%),
+    radial-gradient(circle at 40% 50%, rgba(17, 164, 84, 0.05), transparent 20%),
+    #fff;
+}
+
+.flow-stage,
+.flow-center {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  justify-items: center;
+  min-width: 0;
+}
+
+.flow-stage h3,
+.flow-center h3 {
+  min-height: 30px;
+  padding: 7px 10px;
+  border: 1px solid #edf1f6;
+  border-radius: 6px;
+  color: #75839a !important;
+  font-size: 12px;
+  font-weight: 650;
+  opacity: 0.58;
+  text-align: center;
+}
+
+.flow-stage:nth-of-type(1) h3,
+.company-card {
+  color: var(--blue);
+}
+
+.flow-stage:nth-of-type(2) h3,
+.product-card {
+  color: var(--green);
+}
+
+.flow-center h3 {
+  color: var(--blue);
+}
+
+.flow-stage:nth-of-type(4) h3,
+.department-card {
+  color: #ef5b16;
+}
+
+.flow-stage:nth-of-type(5) h3,
+.contact-card {
+  color: var(--violet);
+}
+
+.flow-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 2px 8px;
+  align-items: center;
+  align-content: center;
+  width: min(190px, 100%);
+  min-height: 46px;
+  padding: 8px 10px;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.flow-card strong,
+.flow-card small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.flow-card small {
+  color: #344054;
+  font-weight: 650;
+}
+
+.flow-card .nav-icon {
+  grid-row: span 2;
+}
+
+.company-card:first-of-type {
+  margin-top: 72px;
+}
+
+.product-card:first-of-type {
+  margin-top: 52px;
+}
+
+.flow-center .customer-hub {
+  margin-top: 82px;
+}
+
+.department-card:first-of-type {
+  margin-top: 12px;
+}
+
+.contacts-stage .contact-card:first-of-type {
+  margin-top: 34px;
+}
+
+.product-card {
+  border-color: #90dbad;
+  background: #fbfffd;
+}
+
+.department-card {
+  border-color: #ffc39f;
+  background: #fffaf6;
+}
+
+.contact-card {
+  border-color: #cdb7ff;
+  background: #fcfaff;
+}
+
+.customer-hub {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  align-self: center;
+  justify-self: center;
+  width: 146px;
+  height: 146px;
+  min-height: 146px;
+  padding: 18px 10px;
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--text);
+  text-align: center;
+  box-shadow: 0 0 0 8px rgba(15, 104, 255, 0.08);
+}
+
+.customer-hub .nav-icon {
+  color: var(--blue);
+}
+
+.customer-hub strong {
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.gdn-link-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.gdn-link-layer path {
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.link-blue {
+  stroke: var(--blue);
+}
+
+.link-green {
+  stroke: var(--green);
+}
+
+.link-orange {
+  stroke: #ff6b1a;
+}
+
+.link-purple {
+  stroke: var(--violet);
+  stroke-dasharray: 4 5;
+}
+
+.flow-card.ecosystem-focus,
+.customer-hub.ecosystem-focus {
+  outline: 3px solid rgba(15, 104, 255, 0.26);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(15, 104, 255, 0.08);
+}
+
+.network-summary-row,
+.connected-metric-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.network-summary-row {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 12px;
+}
+
+.connected-metric-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.connected-metric-grid button {
+  grid-template-columns: 44px minmax(0, 1fr);
+  min-height: 70px;
+}
+
+.connected-metric-grid .tile-icon {
+  grid-row: span 2;
+}
+
+.tile-icon.amber {
+  color: #f97316;
+  background: #fff4e8;
+}
+
+.ecosystem-table {
+  min-width: 1040px;
+}
+
+.network-classification-card .ecosystem-table {
+  min-width: 960px;
+}
+
+.network-classification-card th:last-child,
+.network-classification-card td:last-child {
+  text-align: right;
+}
+
+.network-classification-card td.row-actions {
+  display: table-cell;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.network-classification-card td.row-actions .icon-button {
+  display: inline-grid;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.ecosystem-table th,
+.ecosystem-table td {
+  white-space: nowrap;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
+.status-dot.healthy {
+  background: var(--green);
+}
+
+.status-dot.degraded {
+  background: var(--red);
+}
+
+.link-button {
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.strategy-badge,
+.priority {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.strategy-badge.gold {
+  color: #b45309;
+  background: #fff3e3;
+}
+
+.strategy-badge.blue {
+  color: #0758c8;
+  background: var(--blue-soft);
+}
+
+.strategy-badge.green {
+  color: #0b7b3a;
+  background: var(--green-soft);
+}
+
+.priority.high {
+  color: var(--red);
+  background: var(--red-soft);
+}
+
+.priority.medium {
+  color: #f97316;
+  background: #fff4e8;
+}
+
 .kpi-stack,
 .persona-list,
 .event-stream,
@@ -2332,8 +2934,35 @@ tr:last-child td {
 
   .compliance-layout,
   .domain-dashboard.two-column,
-  .domain-dashboard.three-column {
+  .domain-dashboard.three-column,
+  .ecosystem-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ecosystem-hierarchy-card,
+  .ecosystem-network-card,
+  .connected-entities,
+  .active-node-card,
+  .network-classification-card {
+    grid-column: 1;
+  }
+
+  .gdn-flow-map {
+    grid-template-columns: 1.02fr 1.08fr 0.88fr 1.1fr 0.9fr;
+  }
+
+  .gdn-link-layer {
+    display: block;
+  }
+
+  .network-summary-row,
+  .connected-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hierarchy-branches,
+  .hierarchy-meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .three-column .panel.wide {
@@ -2395,6 +3024,7 @@ tr:last-child td {
   .profile-hero,
   .identity-grid,
   .info-split,
+  .ecosystem-grid,
   .compliance-layout,
   .opportunity-row,
   .task-board,
@@ -2450,9 +3080,36 @@ tr:last-child td {
   .frameworks,
   .policy-grid,
   .metric-tiles,
+  .hierarchy-branches,
+  .hierarchy-meta-grid,
+  .network-summary-row,
+  .connected-metric-grid,
   .governance-mini-grid,
   .nps-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hierarchy-map {
+    min-height: auto;
+  }
+
+  .hierarchy-map::before,
+  .hierarchy-map::after {
+    display: none;
+  }
+
+  .gdn-flow-map {
+    grid-template-columns: 1.02fr 1.08fr 0.88fr 1.1fr 0.9fr;
+    min-height: 410px;
+  }
+
+  .hierarchy-tags {
+    grid-template-columns: 1fr;
+  }
+
+  .hierarchy-tags span {
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .demo-dock {
