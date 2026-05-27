@@ -30,12 +30,17 @@ const icons = {
 
 const customers = {
   anxun: {
-    initials: "MH",
-    name: "Marrilton Hotels Global",
-    overviewName: "Marrilton Hotels Global",
+    initials: "AH",
+    name: "Ardenbrook Hospitality Group",
+    displayName: "Ardenbrook Hospitality",
+    customerType: "Multi-Brand Hotel Management Group",
+    accountSegment: "Global Strategic Account",
+    website: "ardenbrook-hospitality.example",
+    overviewName: "Ardenbrook Hospitality Group",
     tier: "Tier 1 (Global Core KA)",
     overviewTier: "Tie 1",
-    industry: "Hospitality / Hotel & Leisure",
+    industry: "Hospitality / Resort Operations",
+    overviewSegment: "Hospitality / Resort",
     arr: "$2,640,000",
     expiration: "2026-12-31",
     location: "Bethesda, Maryland, USA",
@@ -45,11 +50,11 @@ const customers = {
     oes: "8.1 / 10",
     nps: "42",
     executive: { name: "David Sinclair", email: "david.sinclair@derbysoft.net" },
-    csm: { name: "Emma Rutherford", email: "emma.rutherford@marrilton.com" },
-    customerId: "CUST-MARRILTON-99875",
+    csm: { name: "Emma Rutherford", email: "emma.rutherford@derbysoft.net" },
+    customerId: "CUST-ARDENBROOK-99875",
     hq: "Bethesda, Maryland, USA",
-    parent: "Marrilton Worldwide Inc.",
-    tags: ["Global Strategic", "Luxury Brand", "Global Chain", "CRS Connected"],
+    parent: "Ardenbrook Holdings Group LLC",
+    tags: ["Multi-Brand Hotel Group", "Global Chain", "CRS Connected", "Direct API Enabled"],
     contacts: [
       {
         role: "Decision Maker",
@@ -57,7 +62,7 @@ const customers = {
         name: "David Sterling",
         title: "CTO",
         influence: 5,
-        email: "david.sterling@marrilton.com",
+        email: "david.sterling@ardenbrook.com",
         phone: "+1 (202) 555-0198",
         im: "Teams: david.sterling",
         responsibility: "Technical decision owner and executive sponsor."
@@ -68,7 +73,7 @@ const customers = {
         name: "Jane Gallagher",
         title: "Head of IT",
         influence: 5,
-        email: "jane.gallagher@marrilton.com",
+        email: "jane.gallagher@ardenbrook.com",
         phone: "+1 (301) 555-0721",
         im: "Teams: jane.gallagher",
         responsibility: "Key stakeholder for platform integration and delivery."
@@ -79,7 +84,7 @@ const customers = {
         name: "Michael O'Connor",
         title: "Product Manager",
         influence: 4,
-        email: "michael.oconnor@marrilton.com",
+        email: "michael.oconnor@ardenbrook.com",
         phone: "+44 (0) 7700 900461",
         im: "Teams: michael.oconnor",
         responsibility: "Drives daily operational coordination."
@@ -90,7 +95,7 @@ const customers = {
         name: "Emma Kensington",
         title: "Finance Director",
         influence: 5,
-        email: "emma.kensington@marrilton.com",
+        email: "emma.kensington@ardenbrook.com",
         phone: "+1 (301) 555-0143",
         im: "Teams: emma.kensington",
         responsibility: "Budget owner and renewal approval authority."
@@ -361,7 +366,7 @@ function renderCustomer(key, options = {}) {
   setText("customerInitials", customer.initials);
   setText("customerName", customer.overviewName || customer.name);
   setText("customerTier", customer.overviewTier || customer.tier);
-  setText("customerIndustry", customer.industry);
+  setText("customerIndustry", customer.overviewSegment || customer.industry);
   setText("customerArr", customer.arr);
   setText("customerExpiration", customer.expiration);
   setText("healthScore", customer.score);
@@ -468,17 +473,17 @@ function drawerTemplate(type, payload = {}) {
   const firstContact = customer.contacts[0];
   const contact = payload.contact || firstContact;
   const ecosystemLabels = {
-    group: "Marrilton Worldwide Inc.",
-    customer: "Marrilton Hotels Global",
+    group: "Ardenbrook Holdings Group LLC",
+    customer: "Ardenbrook Hospitality Group",
     pkfare: "PKFARE",
     derbysoft: "DerbySoft",
     go: "GO",
     exchange: "Exchange",
     bts: "BTS",
-    beijing: "Marrilton North America",
-    shanghai: "Marrilton Europe, Middle East & Africa",
-    shenzhen: "Marrilton Asia Pacific",
-    suzhou: "Marrilton Resort & Spa - Bali",
+    beijing: "Ardenbrook Atlantic Division",
+    shanghai: "Ardenbrook Lakeside Division",
+    shenzhen: "Ardenbrook Pacific Division",
+    suzhou: "Ardenbrook Harborview Bethesda",
     reseller: "Distribution & Access Model",
     tier: "Governance Tier",
     billing: "Billing Model",
@@ -715,7 +720,7 @@ function drawerTemplate(type, payload = {}) {
       body: `
         <section class="drawer-section">
           <ul class="drawer-list">
-            <li>MSA_Marrilton_2021.pdf · verified</li>
+            <li>MSA_Ardenbrook_2021.pdf · verified</li>
             <li>API_Addendum_2024.pdf · verified</li>
             <li>Security_Review_2025.pdf · next review 2025-08-28</li>
           </ul>
@@ -729,7 +734,7 @@ function drawerTemplate(type, payload = {}) {
         <section class="drawer-section">
           <h3>Network role</h3>
           <ul class="drawer-list">
-            <li>Marrilton Hotels Global acts as the customer brand entity at the center of group companies, products, departments, and contacts.</li>
+            <li>Ardenbrook Hospitality Group acts as the customer brand entity at the center of group companies, products, departments, and contacts.</li>
             <li>14 active relationships connect 4 group companies, 6 products / services, 6 departments, and 5 contacts.</li>
             <li>RevenueSync is currently degraded and should be reviewed before executive reporting.</li>
           </ul>
@@ -747,7 +752,7 @@ function drawerTemplate(type, payload = {}) {
         <section class="drawer-section">
           <h3>Hierarchy context</h3>
           <ul class="drawer-list">
-            <li>Belongs to the Marrilton Worldwide Inc. hierarchy and inherits brand-level governance rules.</li>
+            <li>Belongs to the Ardenbrook Holdings Group LLC hierarchy and inherits brand-level governance rules.</li>
             <li>Regional divisions are connected to products through direct API and GDS distribution relationships.</li>
             <li>Parent, brand, region, and property identifiers keep billing, service, and ownership views aligned.</li>
           </ul>
@@ -885,10 +890,10 @@ function drawerTemplate(type, payload = {}) {
       body: `
         <section class="drawer-section">
           <div class="theme-cloud">
-            <span>Global Strategic</span>
-            <span>Luxury Brand</span>
+            <span>Multi-Brand Hotel Group</span>
             <span>Global Chain</span>
             <span>CRS Connected</span>
+            <span>Direct API Enabled</span>
             <span>Renewal Window</span>
             <span>GDN Provider</span>
             <span>Executive Sponsor</span>
