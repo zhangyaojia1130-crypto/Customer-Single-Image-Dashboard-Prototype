@@ -2515,6 +2515,577 @@ tr:last-child td {
   background: #526071;
 }
 
+.dna-workspace {
+  display: grid;
+  gap: 14px;
+}
+
+.dna-overview-panel .panel-title {
+  align-items: flex-start;
+}
+
+.dna-toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.2fr) repeat(3, minmax(150px, 0.9fr));
+  gap: 12px;
+  margin-bottom: 14px;
+  align-items: end;
+}
+
+.dna-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dna-search .nav-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--muted);
+}
+
+.dna-search input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px 0 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: #fff;
+  outline: none;
+}
+
+.dna-search input:focus {
+  border-color: #9dc0ff;
+  box-shadow: 0 0 0 3px rgba(15, 104, 255, 0.1);
+}
+
+.dna-filter {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dna-filter select {
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+}
+
+.dna-table-wrap {
+  border-radius: 6px;
+}
+
+.dna-contacts-table {
+  min-width: 980px;
+}
+
+.dna-contact-row {
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.dna-contact-row:hover,
+.dna-contact-row.selected {
+  background: #f7fbff;
+}
+
+.dna-contact-row.selected td:first-child {
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+.dna-name-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dna-name-cell .mini-avatar {
+  width: 30px;
+  height: 30px;
+  font-size: 11px;
+}
+
+.dna-score {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.dna-score small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.engagement-pill {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.engagement-pill.warm {
+  color: #c2410c;
+  background: #fff1e8;
+}
+
+.engagement-pill.cool {
+  color: #1d4ed8;
+  background: #eff6ff;
+}
+
+.engagement-pill.neutral {
+  color: #526071;
+  background: #eef2f6;
+}
+
+.dna-chevron {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.dna-empty {
+  padding: 28px 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.dna-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: minmax(0, auto) minmax(280px, 1fr);
+  grid-template-areas:
+    "profile profile persona persona ownership ownership"
+    "engagement engagement history history history history";
+  gap: 12px;
+  align-items: stretch;
+}
+
+.dna-profile-card,
+.dna-persona-card,
+.dna-ownership-card,
+.dna-engagement-card,
+.dna-history-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.dna-profile-card,
+.dna-persona-card,
+.dna-ownership-card {
+  min-height: 320px;
+}
+
+.dna-card > h2 {
+  flex-shrink: 0;
+}
+
+.dna-card-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.dna-tag-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dna-tag-cluster--footer {
+  margin-top: 12px;
+}
+
+.dna-workspace .dna-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #344054;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.dna-persona-metrics {
+  flex-shrink: 0;
+}
+
+.dna-persona-metrics + .dna-tag-cluster {
+  margin-top: 16px;
+}
+
+.dna-persona-notes-block {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.dna-persona-experience-block {
+  display: grid;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.dna-persona-notes-block h3,
+.dna-persona-experience-block h3,
+.dna-context h3 {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.dna-persona-notes-block p,
+.dna-context p {
+  margin: 0;
+  color: #344054;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.dna-ownership-card .dna-card-body {
+  gap: 12px;
+}
+
+.dna-ownership-card .dna-ownership-list {
+  flex-shrink: 0;
+}
+
+.dna-engagement-card .dna-engagement-tiles > div span {
+  line-height: 1.3;
+  white-space: normal;
+}
+
+.dna-ownership-list {
+  display: grid;
+  gap: 12px;
+}
+
+.dna-ownership-card .dna-activity-snapshot--ownership {
+  margin-top: auto;
+  padding-top: 12px;
+  grid-template-columns: 1fr;
+}
+
+.dna-ownership-card .dna-activity-snapshot--ownership strong {
+  white-space: nowrap;
+}
+
+.dna-ownership-card .dna-activity-snapshot--ownership strong .nav-icon {
+  flex: 0 0 auto;
+}
+
+.dna-engagement-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dna-engagement-card .dna-engagement-tiles {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  flex-shrink: 0;
+  margin-bottom: 0;
+  gap: 8px;
+}
+
+.dna-engagement-card .dna-engagement-tiles > div {
+  min-height: 60px;
+  padding: 10px;
+}
+
+.dna-engagement-card .dna-engagement-tiles span,
+.dna-engagement-card .dna-engagement-tiles strong {
+  white-space: nowrap;
+}
+
+.dna-engagement-card .dna-engagement-tiles span {
+  font-size: 10.5px;
+}
+
+.dna-engagement-card .dna-engagement-tiles strong {
+  font-size: 16px;
+}
+
+.dna-engagement-card .dna-context {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel-soft);
+}
+
+.dna-history-stack {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.dna-history-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+.dna-history-card .dna-view-all {
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.dna-history-card > .dna-history-stack {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.dna-card h2 {
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+
+.dna-profile-card {
+  grid-area: profile;
+}
+
+.dna-persona-card {
+  grid-area: persona;
+}
+
+.dna-ownership-card {
+  grid-area: ownership;
+}
+
+.dna-engagement-card {
+  grid-area: engagement;
+}
+
+.dna-history-card {
+  grid-area: history;
+}
+
+.dna-profile-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.mini-profile-avatar {
+  width: 52px;
+  height: 52px;
+  font-size: 16px;
+  background: var(--blue);
+  color: #fff;
+}
+
+.dna-profile-head strong {
+  font-size: 16px;
+}
+
+.dna-profile-head p {
+  margin-top: 2px;
+  color: #344054;
+  font-size: 12px;
+}
+
+.dna-meta-list {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 12px;
+}
+
+.dna-meta-list div {
+  display: grid;
+  gap: 4px;
+}
+
+.dna-meta-list dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.dna-meta-list dd {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  font-weight: 650;
+}
+
+.dna-meta-list a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.dna-metric-row:last-child {
+  margin-bottom: 0;
+}
+
+.dna-metric-row {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.dna-metric-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.dna-metric-head strong {
+  color: var(--text);
+  font-size: 13px;
+}
+
+.dna-owner-row {
+  display: grid;
+  gap: 6px;
+}
+
+.dna-owner-row > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dna-owner-person {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dna-owner-person strong {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+}
+
+.dna-activity-snapshot {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.dna-activity-snapshot > div {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel-soft);
+}
+
+.dna-activity-snapshot span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.dna-activity-snapshot strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.priority-pill {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.priority-pill.high {
+  color: var(--red);
+  background: var(--red-soft);
+}
+
+.priority-pill.medium {
+  color: #c2410c;
+  background: #fff1e8;
+}
+
+.priority-pill.low {
+  color: #526071;
+  background: #eef2f6;
+}
+
+.dna-engagement-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.dna-engagement-tiles > div {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel-soft);
+}
+
+.dna-engagement-tiles span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.dna-engagement-tiles strong {
+  font-size: 18px;
+}
+
+.dna-heat {
+  color: #c2410c;
+}
+
+.dna-history-table {
+  width: 100%;
+  min-width: 0;
+}
+
+.dna-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.dna-view-all:hover {
+  text-decoration: underline;
+}
+
 .pipeline {
   display: grid;
   grid-template-columns: repeat(5, minmax(110px, 1fr));
@@ -2986,8 +3557,36 @@ tr:last-child td {
   .compliance-layout,
   .domain-dashboard.two-column,
   .domain-dashboard.three-column,
-  .ecosystem-grid {
+  .ecosystem-grid,
+  .dna-toolbar,
+  .dna-detail-grid {
     grid-template-columns: 1fr;
+  }
+
+  .dna-detail-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "profile"
+      "persona"
+      "ownership"
+      "engagement"
+      "history";
+  }
+
+  .dna-profile-card,
+  .dna-persona-card,
+  .dna-ownership-card {
+    min-height: 0;
+  }
+
+  .dna-engagement-card .dna-engagement-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dna-engagement-tiles,
+  .dna-activity-snapshot {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .ecosystem-hierarchy-card,
@@ -3136,7 +3735,9 @@ tr:last-child td {
   .network-summary-row,
   .connected-metric-grid,
   .governance-mini-grid,
-  .nps-grid {
+  .nps-grid,
+  .dna-engagement-tiles,
+  .dna-activity-snapshot {
     grid-template-columns: 1fr;
   }
 
