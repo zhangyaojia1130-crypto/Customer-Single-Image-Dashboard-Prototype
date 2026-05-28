@@ -204,6 +204,557 @@ const customers = {
 let currentCustomerKey = "anxun";
 let demoTimer = null;
 let demoIndex = 0;
+let selectedDnaIndex = 0;
+
+const stakeholderDnaEnrichment = {
+  "David Sterling": {
+    initials: "DS",
+    portrait: "portrait-david",
+    department: "Technology & Digital",
+    seniority: "C-Level",
+    preferredChannel: "Email / Teams",
+    location: "Bethesda, Maryland, USA",
+    tenure: "4 years 8 months",
+    profileTags: ["Executive Sponsor", "Decision Maker", "Innovation Advocate"],
+    relationshipOwner: "David Sinclair",
+    personaType: "Strategic Buyer",
+    interestScore: 86,
+    engagementHealth: "warm",
+    decisionPower: 92,
+    influenceScore: 94,
+    personaLabels: ["Strategic Buyer", "Technical Evaluator", "Executive Sponsor"],
+    personaNotes:
+      "David is a results-driven leader focused on platform modernization, measurable ROI, and low-risk delivery. He responds best to executive summaries with clear milestones and quantified business impact.",
+    industryExperience: ["SaaS Platform", "AI Enablement", "Global Distribution", "Enterprise Integration"],
+    assignedAE: { name: "David Sinclair", initials: "DS", portrait: "portrait-david", email: "david.sinclair@derbysoft.net" },
+    assignedCSM: { name: "Emma Rutherford", initials: "ER", portrait: "portrait-emma", email: "emma.rutherford@derbysoft.net" },
+    escalationOwner: { name: "Alex Winston", initials: "AW", email: "alex.winston@derbysoft.net" },
+    lastMeeting: "2025-06-18",
+    nextTouchpoint: "2025-06-28",
+    priority: "high",
+    daysSinceLastTouch: 3,
+    engagementHeat: "High",
+    lastEmailOpen: "2025-06-20",
+    lastMeetingDate: "2025-06-18",
+    relationshipContext:
+      "David is a strong supporter of the GDN roadmap and renewal expansion. Sensitive to delivery risk — escalate integration delays early and pair technical updates with business outcomes.",
+    interactions: [
+      { time: "2025-06-18 14:00", event: "Executive alignment call", owner: "David Sinclair", channel: "Video Call", status: "Completed" },
+      { time: "2025-06-12 09:30", event: "QBR summary delivered", owner: "Emma Rutherford", channel: "Email", status: "Delivered" },
+      { time: "2025-06-05 16:15", event: "CloudStay latency review", owner: "Jane Gallagher", channel: "Teams", status: "Completed" },
+      { time: "2025-05-28 11:00", event: "Renewal scope workshop", owner: "David Sinclair", channel: "Video Call", status: "Completed" }
+    ]
+  },
+  "Jane Gallagher": {
+    initials: "JG",
+    portrait: "",
+    department: "IT & Platform Engineering",
+    seniority: "Director",
+    preferredChannel: "Teams",
+    location: "Bethesda, Maryland, USA",
+    tenure: "6 years 2 months",
+    profileTags: ["Technical Buyer", "Integration Owner", "Data Steward"],
+    relationshipOwner: "Emma Rutherford",
+    personaType: "Technical Evaluator",
+    interestScore: 78,
+    engagementHealth: "neutral",
+    decisionPower: 84,
+    influenceScore: 88,
+    personaLabels: ["Technical Evaluator", "Delivery Gatekeeper", "Platform Owner"],
+    personaNotes:
+      "Jane prioritizes integration stability, security controls, and operational readiness. Provide architecture diagrams, SLA evidence, and clear rollback plans before major releases.",
+    industryExperience: ["CRS Integration", "API Governance", "Data Platform", "Security Compliance"],
+    assignedAE: { name: "David Sinclair", initials: "DS", portrait: "portrait-david", email: "david.sinclair@derbysoft.net" },
+    assignedCSM: { name: "Emma Rutherford", initials: "ER", portrait: "portrait-emma", email: "emma.rutherford@derbysoft.net" },
+    escalationOwner: { name: "Michael O'Connor", initials: "MO", email: "michael.oconnor@derbysoft.net" },
+    lastMeeting: "2025-06-05",
+    nextTouchpoint: "2025-06-25",
+    priority: "medium",
+    daysSinceLastTouch: 8,
+    engagementHeat: "Medium",
+    lastEmailOpen: "2025-06-14",
+    lastMeetingDate: "2025-06-05",
+    relationshipContext:
+      "Neutral on renewal timing but engaged on delivery quality. CloudStay latency is the primary concern — schedule a technical deep-dive before executive escalation.",
+    interactions: [
+      { time: "2025-06-05 16:15", event: "Integration health review", owner: "Emma Rutherford", channel: "Teams", status: "Completed" },
+      { time: "2025-05-22 10:00", event: "API error-rate follow-up", owner: "Jane Gallagher", channel: "Email", status: "Delivered" },
+      { time: "2025-05-10 15:30", event: "Security questionnaire submitted", owner: "David Sterling", channel: "Email", status: "Completed" }
+    ]
+  },
+  "Michael O'Connor": {
+    initials: "MO",
+    portrait: "",
+    department: "Product & Operations",
+    seniority: "Manager",
+    preferredChannel: "Teams",
+    location: "London, United Kingdom",
+    tenure: "2 years 11 months",
+    profileTags: ["Day-to-Day Operator", "Product Champion"],
+    relationshipOwner: "Emma Rutherford",
+    personaType: "User / Influencer",
+    interestScore: 72,
+    engagementHealth: "cool",
+    decisionPower: 58,
+    influenceScore: 76,
+    personaLabels: ["User Champion", "Operational Coordinator"],
+    personaNotes:
+      "Michael coordinates daily operations and adoption feedback. He values practical release notes, training assets, and fast support routing for property teams.",
+    industryExperience: ["Hotel Operations", "Product Adoption", "Workflow Automation"],
+    assignedAE: { name: "David Sinclair", initials: "DS", portrait: "portrait-david", email: "david.sinclair@derbysoft.net" },
+    assignedCSM: { name: "Emma Rutherford", initials: "ER", portrait: "portrait-emma", email: "emma.rutherford@derbysoft.net" },
+    escalationOwner: { name: "Emma Rutherford", initials: "ER", email: "emma.rutherford@derbysoft.net" },
+    lastMeeting: "2025-05-30",
+    nextTouchpoint: "2025-07-02",
+    priority: "low",
+    daysSinceLastTouch: 14,
+    engagementHeat: "Low",
+    lastEmailOpen: "2025-06-08",
+    lastMeetingDate: "2025-05-30",
+    relationshipContext:
+      "Supportive on feature adoption but not a budget signer. Useful for operational proof points and VoC signals ahead of renewal conversations.",
+    interactions: [
+      { time: "2025-05-30 11:00", event: "Adoption metrics review", owner: "Emma Rutherford", channel: "Video Call", status: "Completed" },
+      { time: "2025-05-15 09:00", event: "Training deck shared", owner: "Michael O'Connor", channel: "Email", status: "Delivered" }
+    ]
+  },
+  "Emma Kensington": {
+    initials: "EK",
+    portrait: "",
+    department: "Finance & Commercial",
+    seniority: "Director",
+    preferredChannel: "Email",
+    location: "Bethesda, Maryland, USA",
+    tenure: "5 years 1 month",
+    profileTags: ["Economic Buyer", "Renewal Approver", "Budget Owner"],
+    relationshipOwner: "David Sinclair",
+    personaType: "Economic Buyer",
+    interestScore: 81,
+    engagementHealth: "warm",
+    decisionPower: 90,
+    influenceScore: 91,
+    personaLabels: ["Economic Buyer", "Renewal Approver", "Risk Reviewer"],
+    personaNotes:
+      "Emma evaluates renewal economics, credit exposure, and contract terms. Lead with TCO comparisons, liability clarity, and phased investment options.",
+    industryExperience: ["Hospitality Finance", "Contract Management", "Vendor Consolidation"],
+    assignedAE: { name: "David Sinclair", initials: "DS", portrait: "portrait-david", email: "david.sinclair@derbysoft.net" },
+    assignedCSM: { name: "Emma Rutherford", initials: "ER", portrait: "portrait-emma", email: "emma.rutherford@derbysoft.net" },
+    escalationOwner: { name: "David Sinclair", initials: "DS", email: "david.sinclair@derbysoft.net" },
+    lastMeeting: "2025-06-12",
+    nextTouchpoint: "2025-06-26",
+    priority: "high",
+    daysSinceLastTouch: 5,
+    engagementHeat: "High",
+    lastEmailOpen: "2025-06-19",
+    lastMeetingDate: "2025-06-12",
+    relationshipContext:
+      "Promoter on value but will pause if legal review slips. Align renewal pricing with auto-renewal timeline and finance reconciliation status.",
+    interactions: [
+      { time: "2025-06-12 09:30", event: "Renewal pricing discussion", owner: "David Sinclair", channel: "Video Call", status: "Completed" },
+      { time: "2025-06-01 08:45", event: "Credit utilization report sent", owner: "Emma Rutherford", channel: "Email", status: "Delivered" },
+      { time: "2025-05-20 13:00", event: "Contract terms clarification", owner: "Emma Kensington", channel: "Email", status: "Completed" }
+    ]
+  }
+};
+
+function defaultStakeholderEnrichment(contact, customer) {
+  const seed = contact.name.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase();
+  return {
+    initials: seed,
+    portrait: "",
+    department: contact.role,
+    seniority: "Lead",
+    preferredChannel: contact.im || "Email",
+    location: customer.location || customer.hq,
+    tenure: "—",
+    profileTags: [contact.role],
+    relationshipOwner: customer.executive.name,
+    personaType: contact.role,
+    interestScore: 60 + contact.influence * 6,
+    engagementHealth: contact.influence >= 5 ? "warm" : contact.influence >= 4 ? "neutral" : "cool",
+    decisionPower: 50 + contact.influence * 8,
+    influenceScore: contact.influence * 18,
+    personaLabels: [contact.role],
+    personaNotes: contact.responsibility,
+    industryExperience: [customer.industry],
+    assignedAE: {
+      name: customer.executive.name,
+      initials: customer.executive.name
+        .split(" ")
+        .map((part) => part[0])
+        .join("")
+        .slice(0, 2),
+      portrait: "portrait-david",
+      email: customer.executive.email
+    },
+    assignedCSM: {
+      name: customer.csm.name,
+      initials: customer.csm.name
+        .split(" ")
+        .map((part) => part[0])
+        .join("")
+        .slice(0, 2),
+      portrait: "portrait-emma",
+      email: customer.csm.email
+    },
+    escalationOwner: {
+      name: customer.executive.name,
+      initials: customer.executive.name
+        .split(" ")
+        .map((part) => part[0])
+        .join("")
+        .slice(0, 2),
+      email: customer.executive.email
+    },
+    lastMeeting: "—",
+    nextTouchpoint: "—",
+    priority: "medium",
+    daysSinceLastTouch: 10,
+    engagementHeat: "Medium",
+    lastEmailOpen: "—",
+    lastMeetingDate: "—",
+    relationshipContext: contact.responsibility,
+    interactions: [
+      {
+        time: "2025-06-01 10:00",
+        event: "Stakeholder check-in",
+        owner: customer.csm.name,
+        channel: "Email",
+        status: "Delivered"
+      }
+    ]
+  };
+}
+
+function getStakeholderProfiles() {
+  const customer = getCustomer();
+  return customer.contacts.map((contact) => ({
+    ...contact,
+    ...(stakeholderDnaEnrichment[contact.name] || defaultStakeholderEnrichment(contact, customer))
+  }));
+}
+
+function getSelectedStakeholder() {
+  const profiles = getStakeholderProfiles();
+  return profiles[selectedDnaIndex] || profiles[0];
+}
+
+function engagementHealthLabel(health) {
+  const labels = { warm: "Warm", cool: "Cool", neutral: "Neutral" };
+  return labels[health] || "Neutral";
+}
+
+function renderEngagementHealthPill(health) {
+  return `<span class="engagement-pill ${escapeHtml(health)}">${escapeHtml(engagementHealthLabel(health))}</span>`;
+}
+
+function renderMetricBar(label, value, suffix = "%") {
+  const display = String(value);
+  const numeric = Number(display.split("/")[0]) || 0;
+  const showSuffix = suffix === "%" && !display.includes("/");
+  return `
+    <div class="dna-metric-row">
+      <div class="dna-metric-head">
+        <span>${escapeHtml(label)}</span>
+        <strong>${escapeHtml(display)}${showSuffix ? suffix : ""}</strong>
+      </div>
+      <progress value="${Math.min(100, numeric)}" max="100"></progress>
+    </div>
+  `;
+}
+
+function renderOwnerRow(label, owner) {
+  const portraitClass = owner.portrait ? ` ${owner.portrait}` : "";
+  return `
+    <div class="dna-owner-row">
+      <span>${escapeHtml(label)}</span>
+      <div class="dna-owner-person">
+        <span class="mini-avatar portrait${portraitClass}">${escapeHtml(owner.initials)}</span>
+        <strong>${escapeHtml(owner.name)}</strong>
+        <button type="button" class="icon-button dna-contact-icon" data-dna-mail="${escapeHtml(owner.email)}" aria-label="Email ${escapeHtml(owner.name)}">
+          <span class="nav-icon" data-icon="mail"></span>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function filterStakeholderProfiles() {
+  const query = (document.getElementById("dnaContactSearch")?.value || "").trim().toLowerCase();
+  const ownership = document.getElementById("dnaFilterOwnership")?.value || "all";
+  const persona = document.getElementById("dnaFilterPersona")?.value || "all";
+  const interest = document.getElementById("dnaFilterInterest")?.value || "all";
+
+  return getStakeholderProfiles()
+    .map((profile, index) => ({ profile, index }))
+    .filter(({ profile }) => {
+      const haystack = [
+        profile.role,
+        profile.name,
+        profile.title,
+        profile.email,
+        profile.phone,
+        profile.personaType,
+        profile.relationshipOwner
+      ]
+        .join(" ")
+        .toLowerCase();
+      if (query && !haystack.includes(query)) return false;
+      if (ownership !== "all" && profile.relationshipOwner !== ownership) return false;
+      if (persona !== "all" && profile.personaType !== persona) return false;
+      if (interest === "high" && profile.interestScore < 80) return false;
+      if (interest === "medium" && (profile.interestScore < 60 || profile.interestScore >= 80)) return false;
+      if (interest === "low" && profile.interestScore >= 60) return false;
+      return true;
+    });
+}
+
+function renderDnaFilterOptions() {
+  const profiles = getStakeholderProfiles();
+  const ownershipSelect = document.getElementById("dnaFilterOwnership");
+  const personaSelect = document.getElementById("dnaFilterPersona");
+  if (!ownershipSelect || !personaSelect) return;
+
+  const owners = [...new Set(profiles.map((profile) => profile.relationshipOwner))];
+  const personas = [...new Set(profiles.map((profile) => profile.personaType))];
+  const currentOwner = ownershipSelect.value;
+  const currentPersona = personaSelect.value;
+
+  ownershipSelect.innerHTML = `<option value="all">All owners</option>${owners
+    .map((owner) => `<option value="${escapeHtml(owner)}">${escapeHtml(owner)}</option>`)
+    .join("")}`;
+  personaSelect.innerHTML = `<option value="all">All personas</option>${personas
+    .map((type) => `<option value="${escapeHtml(type)}">${escapeHtml(type)}</option>`)
+    .join("")}`;
+
+  if (owners.includes(currentOwner)) ownershipSelect.value = currentOwner;
+  if (personas.includes(currentPersona)) personaSelect.value = currentPersona;
+}
+
+function renderDnaContacts() {
+  const table = document.getElementById("dnaContactsTable");
+  if (!table) return;
+
+  const filtered = filterStakeholderProfiles();
+  if (!filtered.some(({ index }) => index === selectedDnaIndex)) {
+    selectedDnaIndex = filtered[0]?.index ?? 0;
+  }
+
+  table.innerHTML = filtered.length
+    ? filtered
+        .map(({ profile, index }) => {
+          const active = index === selectedDnaIndex ? " selected" : "";
+          const portraitClass = profile.portrait ? ` portrait ${profile.portrait}` : "";
+          return `
+            <tr class="dna-contact-row${active}" data-dna-index="${index}" tabindex="0" role="button" aria-pressed="${index === selectedDnaIndex}">
+              <td><span class="role-badge ${profile.roleClass}">${escapeHtml(profile.role)}</span></td>
+              <td>
+                <span class="dna-name-cell">
+                  <span class="mini-avatar${portraitClass}">${escapeHtml(profile.initials)}</span>
+                  <strong>${escapeHtml(profile.name)}</strong>
+                </span>
+              </td>
+              <td>${escapeHtml(profile.title)}</td>
+              <td>${renderInfluence(profile.influence)}</td>
+              <td>
+                <span class="contact-stack">
+                  <a href="mailto:${escapeHtml(profile.email)}">${escapeHtml(profile.email)}</a>
+                  <span>${escapeHtml(profile.phone)}</span>
+                </span>
+              </td>
+              <td><span class="dna-score">${profile.interestScore}<small>/100</small></span></td>
+              <td>${renderEngagementHealthPill(profile.engagementHealth)}</td>
+              <td>
+                <span class="row-actions">
+                  <button type="button" class="icon-button" data-dna-view="${index}" aria-label="View ${escapeHtml(profile.name)} profile">
+                    <span class="nav-icon" data-icon="person"></span>
+                  </button>
+                  <button type="button" class="icon-button" data-dna-select="${index}" aria-label="Expand ${escapeHtml(profile.name)}">
+                    <span class="dna-chevron" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </td>
+            </tr>
+          `;
+        })
+        .join("")
+    : `<tr><td colspan="8" class="dna-empty">No contacts match the current filters.</td></tr>`;
+
+  mountIcons(table);
+  renderDnaDetail();
+}
+
+function renderDnaDetail() {
+  const container = document.getElementById("dnaDetailGrid");
+  if (!container) return;
+
+  const profile = getSelectedStakeholder();
+  if (!profile) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const priorityClass =
+    profile.priority === "high" ? "high" : profile.priority === "low" ? "low" : "medium";
+  const priorityLabel =
+    profile.priority === "high"
+      ? "High Priority"
+      : profile.priority === "low"
+        ? "Low Priority"
+        : "Medium Priority";
+  const portraitClass = profile.portrait ? ` ${profile.portrait}` : "";
+
+  container.innerHTML = `
+    <article class="panel dna-card dna-profile-card">
+      <h2>Stakeholder Profile</h2>
+      <div class="dna-card-body">
+        <div class="dna-profile-head">
+          <span class="customer-avatar mini-profile-avatar${portraitClass}">${escapeHtml(profile.initials)}</span>
+          <div>
+            <strong>${escapeHtml(profile.name)}</strong>
+            <p>${escapeHtml(profile.title)} · ${escapeHtml(profile.department)}</p>
+            <p class="muted">${escapeHtml(profile.seniority)}</p>
+          </div>
+        </div>
+        <dl class="dna-meta-list">
+          <div><dt>Contact</dt><dd><a href="mailto:${escapeHtml(profile.email)}">${escapeHtml(profile.email)}</a><span>${escapeHtml(profile.phone)}</span></dd></div>
+          <div><dt>Preferred Channel</dt><dd>${escapeHtml(profile.preferredChannel)}</dd></div>
+          <div><dt>Location</dt><dd>${escapeHtml(profile.location)}</dd></div>
+          <div><dt>Customer Tenure</dt><dd>${escapeHtml(profile.tenure)}</dd></div>
+        </dl>
+        <div class="dna-tag-cluster dna-tag-cluster--footer">
+          ${profile.profileTags.map((tag) => `<span class="dna-tag">${escapeHtml(tag)}</span>`).join("")}
+        </div>
+      </div>
+    </article>
+
+    <article class="panel dna-card dna-persona-card">
+      <h2>Persona Details</h2>
+      <div class="dna-card-body">
+        <div class="dna-persona-metrics">
+          ${renderMetricBar("Decision Power Matrix", profile.decisionPower)}
+          ${renderMetricBar("Influence Score", `${profile.influenceScore}/100`, "")}
+          ${renderMetricBar("Interest Score", `${profile.interestScore}/100`, "")}
+        </div>
+        <div class="dna-tag-cluster">
+          ${profile.personaLabels.map((label) => `<span class="dna-tag">${escapeHtml(label)}</span>`).join("")}
+        </div>
+        <div class="dna-persona-notes-block">
+          <h3>Persona Notes</h3>
+          <p>${escapeHtml(profile.personaNotes)}</p>
+        </div>
+        <div class="dna-persona-experience-block">
+          <h3>Industry Experience &amp; Knowledge</h3>
+          <div class="dna-tag-cluster">
+            ${profile.industryExperience.map((item) => `<span class="dna-tag">${escapeHtml(item)}</span>`).join("")}
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel dna-card dna-ownership-card">
+      <h2>Relationship Ownership &amp; Activity</h2>
+      <div class="dna-card-body">
+        <div class="dna-ownership-list">
+          ${renderOwnerRow("Assigned AE", profile.assignedAE)}
+          ${renderOwnerRow("Assigned CSM", profile.assignedCSM)}
+          ${renderOwnerRow("Executive Escalation Owner", profile.escalationOwner)}
+        </div>
+        <div class="dna-activity-snapshot dna-activity-snapshot--ownership">
+          <div>
+            <span>Last Meeting</span>
+            <strong><span class="nav-icon" data-icon="card"></span>${escapeHtml(profile.lastMeeting)}</strong>
+          </div>
+          <div>
+            <span>Next Touchpoint</span>
+            <strong><span class="nav-icon" data-icon="card"></span>${escapeHtml(profile.nextTouchpoint)}</strong>
+          </div>
+          <div>
+            <span>Priority</span>
+            <strong><span class="priority-pill ${priorityClass}">${escapeHtml(priorityLabel)}</span></strong>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel dna-card dna-engagement-card">
+      <h2>Engagement Logs</h2>
+      <div class="dna-card-body dna-engagement-body">
+        <div class="dna-engagement-tiles">
+          <div><span>Days Since Last Touch</span><strong>${profile.daysSinceLastTouch}</strong></div>
+          <div><span>Engagement Heat</span><strong class="dna-heat">${escapeHtml(profile.engagementHeat)}</strong></div>
+          <div><span>Last Email Open Date</span><strong>${escapeHtml(profile.lastEmailOpen)}</strong></div>
+          <div><span>Last Meeting Date</span><strong>${escapeHtml(profile.lastMeetingDate)}</strong></div>
+        </div>
+        <div class="dna-context">
+          <h3>Relationship Context</h3>
+          <p>${escapeHtml(profile.relationshipContext)}</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel dna-card dna-history-card">
+      <h2>Interaction History</h2>
+      <div class="dna-history-stack">
+        <div class="table-wrap dna-history-wrap">
+          <table class="dna-history-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Event</th>
+                <th>Owner</th>
+                <th>Channel</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${profile.interactions
+                .map(
+                  (item) => `
+                <tr>
+                  <td>${escapeHtml(item.time)}</td>
+                  <td>${escapeHtml(item.event)}</td>
+                  <td>${escapeHtml(item.owner)}</td>
+                  <td>${escapeHtml(item.channel)}</td>
+                  <td><span class="pill ${item.status === "Completed" ? "success" : ""}">${escapeHtml(item.status)}</span></td>
+                </tr>
+              `
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </div>
+        <button type="button" class="dna-view-all" data-drawer="stakeholder" data-dna-view-all>View all interactions <span class="dna-chevron" aria-hidden="true"></span></button>
+      </div>
+    </article>
+  `;
+
+  mountIcons(container);
+}
+
+function syncDnaContactRowState() {
+  const table = document.getElementById("dnaContactsTable");
+  if (!table) return;
+  table.querySelectorAll(".dna-contact-row").forEach((row) => {
+    const isSelected = Number(row.dataset.dnaIndex) === selectedDnaIndex;
+    row.classList.toggle("selected", isSelected);
+    row.setAttribute("aria-pressed", String(isSelected));
+  });
+}
+
+function selectDnaStakeholder(index) {
+  const nextIndex = Number(index);
+  if (Number.isNaN(nextIndex)) return;
+  const changed = nextIndex !== selectedDnaIndex;
+  selectedDnaIndex = nextIndex;
+  if (changed) syncDnaContactRowState();
+  renderDnaDetail();
+}
+
+function refreshStakeholderDna() {
+  renderDnaFilterOptions();
+  renderDnaContacts();
+}
 
 const gdnLinks = [
   ["pkfare", "go", "link-blue"],
@@ -393,6 +944,7 @@ function renderCustomer(key, options = {}) {
   renderTags("heroTags", customer.tags);
   renderIdentityTags(customer.tags);
   renderContacts();
+  refreshStakeholderDna();
   if (!options.silent) toast(`Loaded ${customer.name}`);
 }
 
@@ -844,15 +1396,26 @@ function drawerTemplate(type, payload = {}) {
     },
     stakeholder: {
       kicker: "User & Stakeholder DNA",
-      title: "Decision-Maker Matrix",
+      title: `${getSelectedStakeholder().name} · Interaction Timeline`,
       body: `
         <section class="drawer-section">
+          <div class="drawer-card">
+            <strong>${escapeHtml(getSelectedStakeholder().title)}</strong>
+            <p class="muted">${escapeHtml(getSelectedStakeholder().role)} · Interest ${getSelectedStakeholder().interestScore}/100 · ${escapeHtml(engagementHealthLabel(getSelectedStakeholder().engagementHealth))}</p>
+          </div>
           <ul class="drawer-list">
-            <li>David Sterling: champion and executive sponsor.</li>
-            <li>Emma Kensington: economic approver with renewal authority.</li>
-            <li>Jane Gallagher: technical buyer and delivery gatekeeper.</li>
+            ${getSelectedStakeholder()
+              .interactions.map(
+                (item) =>
+                  `<li><strong>${escapeHtml(item.time)}</strong> · ${escapeHtml(item.event)} · ${escapeHtml(item.channel)} · ${escapeHtml(item.status)}</li>`
+              )
+              .join("")}
           </ul>
         </section>
+        <div class="drawer-actions">
+          <button class="primary-button" data-dna-log-touchpoint>Log Touchpoint</button>
+          <button class="outline-button" data-demo-step="contacts">Buying Center</button>
+        </div>
       `
     },
     voc: {
@@ -1033,6 +1596,7 @@ function addContactFromForm(form) {
     responsibility: data.get("responsibility")
   });
   renderContacts();
+  refreshStakeholderDna();
   closeModal();
   toast("Contact added to stakeholder map");
 }
@@ -1122,8 +1686,22 @@ function updateInsightsDockDensity() {
 
 function wireEvents() {
   document.querySelectorAll(".domain-tab").forEach((button) => {
-    button.addEventListener("click", () => showDomain(button.dataset.domain));
+    button.addEventListener("click", () => {
+      showDomain(button.dataset.domain);
+      if (button.dataset.domain === "dna") refreshStakeholderDna();
+    });
   });
+
+  const dnaSearch = document.getElementById("dnaContactSearch");
+  if (dnaSearch) dnaSearch.addEventListener("input", renderDnaContacts);
+  ["dnaFilterOwnership", "dnaFilterPersona", "dnaFilterInterest"].forEach((id) => {
+    const element = document.getElementById(id);
+    if (element) element.addEventListener("change", renderDnaContacts);
+  });
+  const dnaAddContact = document.getElementById("dnaAddContactButton");
+  if (dnaAddContact) dnaAddContact.addEventListener("click", openModal);
+  const dnaExport = document.getElementById("dnaExportButton");
+  if (dnaExport) dnaExport.addEventListener("click", exportContacts);
 
   document.querySelectorAll("[data-subtab]").forEach((button) => {
     button.addEventListener("click", () => switchSubtab(button));
@@ -1188,6 +1766,30 @@ function wireEvents() {
       return;
     }
 
+    const dnaRow = event.target.closest(".dna-contact-row");
+    if (
+      dnaRow &&
+      !event.target.closest("[data-dna-view]") &&
+      !event.target.closest("[data-dna-mail]") &&
+      !event.target.closest("a[href^='mailto:']")
+    ) {
+      selectDnaStakeholder(dnaRow.dataset.dnaIndex);
+      return;
+    }
+
+    const dnaView = event.target.closest("[data-dna-view]");
+    if (dnaView) {
+      selectDnaStakeholder(dnaView.dataset.dnaView);
+      openDrawer("stakeholder");
+      return;
+    }
+
+    const dnaMail = event.target.closest("[data-dna-mail]");
+    if (dnaMail) {
+      toast(`Email context opened for ${dnaMail.dataset.dnaMail}`);
+      return;
+    }
+
     const contactAction = event.target.closest("[data-contact-action]");
     if (contactAction) {
       const contact = getCustomer().contacts[Number(contactAction.dataset.index)];
@@ -1222,6 +1824,9 @@ function wireEvents() {
       showDomain("operations");
       spotlight("operations");
     }
+    if (event.target.closest("[data-dna-log-touchpoint]")) {
+      toast(`Touchpoint logged for ${getSelectedStakeholder().name}`);
+    }
   });
 
   document.addEventListener("keydown", (event) => {
@@ -1236,5 +1841,6 @@ function wireEvents() {
 mountIcons();
 wireEvents();
 renderCustomer("anxun", { silent: true });
+refreshStakeholderDna();
 updateInsightsDockDensity();
 renderGdnLinks();
