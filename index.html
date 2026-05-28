@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Customer Single-Image Dashboard Prototype</title>
-    <link rel="stylesheet" href="styles.css?v=21" />
+    <link rel="stylesheet" href="styles.css?v=23" />
   </head>
   <body>
     <div class="app-shell">
@@ -1077,37 +1077,70 @@
           </section>
 
           <section class="domain-panel" data-domain-panel="dna">
-            <div class="domain-dashboard two-column">
-              <article class="panel wide" data-hotspot="dna-matrix">
+            <div class="dna-workspace">
+              <article class="panel dna-overview-panel" data-hotspot="dna-overview">
                 <div class="panel-title">
-                  <h2>Decision Power Matrix</h2>
-                  <button class="outline-button" data-drawer="stakeholder">Stakeholder Profile</button>
+                  <div>
+                    <h2>Key Contacts Overview</h2>
+                    <span class="updated-copy">Last updated: <span class="last-updated">2025-06-21 11:45</span></span>
+                  </div>
+                  <div class="title-actions">
+                    <button class="primary-button" id="dnaAddContactButton">Add Contact</button>
+                    <button class="outline-button" id="dnaExportButton">Export</button>
+                  </div>
                 </div>
-                <div class="matrix">
-                  <span class="axis x">Interest</span>
-                  <span class="axis y">Influence</span>
-                  <button class="matrix-dot champion">David Sterling</button>
-                  <button class="matrix-dot buyer">Emma Kensington</button>
-                  <button class="matrix-dot tech">Jane Gallagher</button>
-                  <button class="matrix-dot user">Michael O'Connor</button>
+                <div class="dna-toolbar">
+                  <label class="dna-search">
+                    <span class="nav-icon" data-icon="search"></span>
+                    <input
+                      id="dnaContactSearch"
+                      type="search"
+                      placeholder="Search contacts..."
+                      aria-label="Search contacts in stakeholder DNA"
+                    />
+                  </label>
+                  <label class="dna-filter">
+                    <span>Relationship Ownership</span>
+                    <select id="dnaFilterOwnership">
+                      <option value="all">All owners</option>
+                    </select>
+                  </label>
+                  <label class="dna-filter">
+                    <span>Persona Type</span>
+                    <select id="dnaFilterPersona">
+                      <option value="all">All personas</option>
+                    </select>
+                  </label>
+                  <label class="dna-filter">
+                    <span>Interest Level</span>
+                    <select id="dnaFilterInterest">
+                      <option value="all">All levels</option>
+                      <option value="high">High (80+)</option>
+                      <option value="medium">Medium (60–79)</option>
+                      <option value="low">Low (&lt;60)</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="table-wrap dna-table-wrap">
+                  <table class="dna-contacts-table">
+                    <thead>
+                      <tr>
+                        <th>Role Category</th>
+                        <th>Name</th>
+                        <th>Title</th>
+                        <th>Influence</th>
+                        <th>Contacts</th>
+                        <th>Interest Score</th>
+                        <th>Engagement Health</th>
+                        <th>More</th>
+                      </tr>
+                    </thead>
+                    <tbody id="dnaContactsTable"></tbody>
+                  </table>
                 </div>
               </article>
-              <article class="panel">
-                <h2>Professional Persona</h2>
-                <div class="persona-list">
-                  <div><strong>David Sterling</strong><span>Economic Buyer · Promoter</span></div>
-                  <div><strong>Jane Gallagher</strong><span>Technical Buyer · Neutral</span></div>
-                  <div><strong>Emma Kensington</strong><span>Finance Owner · Promoter</span></div>
-                </div>
-              </article>
-              <article class="panel wide">
-                <h2>Interactions &amp; Engagement Logs</h2>
-                <div class="event-stream">
-                  <div><strong>2 days ago</strong><span>Executive email opened by David Sterling</span></div>
-                  <div><strong>5 days ago</strong><span>Integration concern logged by Jane Gallagher</span></div>
-                  <div><strong>12 days ago</strong><span>Renewal pricing thread started with Finance</span></div>
-                </div>
-              </article>
+
+              <div class="dna-detail-grid" id="dnaDetailGrid" data-hotspot="dna-detail"></div>
             </div>
           </section>
 
@@ -1349,6 +1382,6 @@
 
     <div class="toast-root" id="toastRoot" aria-live="polite"></div>
 
-    <script src="script.js?v=21"></script>
+    <script src="script.js?v=24"></script>
   </body>
 </html>
