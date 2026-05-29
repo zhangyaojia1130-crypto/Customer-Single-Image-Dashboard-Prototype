@@ -845,7 +845,7 @@ const demoSteps = [
     id: "sync",
     status: "Source sync",
     domain: "identity",
-    hotspot: "systems",
+    hotspot: "data-source",
     drawer: "sync"
   },
   {
@@ -1379,7 +1379,7 @@ function drawerTemplate(type, payload = {}) {
           <ul class="drawer-list">
             <li>HubSpot, Finance, ServiceNow, Monday, CustomerDB, and warehouse records are connected.</li>
             <li>Salesforce CRM has a warning on stale owner assignment and needs steward review.</li>
-            <li>Last sync timestamps can be refreshed from the ownership matrix.</li>
+            <li>Last sync timestamps can be refreshed from the data source panel.</li>
           </ul>
         </section>
         <section class="drawer-section">
@@ -1913,10 +1913,13 @@ function wireEvents() {
   document.getElementById("cancelModal").addEventListener("click", closeModal);
   const updateButton = document.getElementById("updateButton");
   if (updateButton) updateButton.addEventListener("click", updateTimestamps);
-  document.getElementById("syncButton").addEventListener("click", () => {
-    syncMatrix();
-    openDrawer("sync");
-  });
+  const syncButton = document.getElementById("syncButton");
+  if (syncButton) {
+    syncButton.addEventListener("click", () => {
+      syncMatrix();
+      openDrawer("sync");
+    });
+  }
   document.getElementById("exportButton").addEventListener("click", exportContacts);
   document.getElementById("autoDemoButton").addEventListener("click", toggleAutoDemo);
   window.addEventListener("scroll", updateInsightsDockDensity, { passive: true });
@@ -2009,7 +2012,7 @@ function wireEvents() {
   document.getElementById("drawerBody").addEventListener("click", (event) => {
     if (event.target.closest("#drawerSyncButton") || event.target.closest("#drawerSyncMatrix")) {
       syncMatrix();
-      spotlight("systems");
+      spotlight("data-source");
     }
     if (event.target.closest("#drawerAddContact")) {
       openModal();
