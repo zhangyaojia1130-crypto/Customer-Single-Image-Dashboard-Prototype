@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Customer Single-Image Dashboard Prototype</title>
-    <link rel="stylesheet" href="styles.css?v=23" />
+    <link rel="stylesheet" href="styles.css?v=35" />
   </head>
   <body>
     <div class="app-shell">
@@ -262,7 +262,7 @@
                     <dt>Auto Renewal</dt>
                     <dd><span class="pill success">Yes</span></dd>
                   </div>
-                  <div>
+                  <div class="grey-state">
                     <dt>Liability Cap</dt>
                     <dd>$20,000,000</dd>
                   </div>
@@ -343,7 +343,7 @@
                       </div>
                       <div>
                         <dt>Company Profile</dt>
-                        <dd>ardenbrook-hospitality.example</dd>
+                        <dd>ardenbrook.com</dd>
                       </div>
                       <div>
                         <dt>Property Count Range</dt>
@@ -776,22 +776,57 @@
                     <span>Billing Model</span>
                     <strong>Centralized Clearing with Property Level Allocation</strong>
                   </button>
+                  <button data-drawer="ecosystem-classification" data-ecosystem-focus="reseller-flag">
+                    <span class="nav-icon" data-icon="target"></span>
+                    <span>Is Through Reseller Flag</span>
+                    <strong>Yes</strong>
+                  </button>
+                  <button data-drawer="ecosystem-company" data-ecosystem-focus="partner-cid">
+                    <span class="nav-icon" data-icon="customer"></span>
+                    <span>Partner CID</span>
+                    <strong>PTR-THG-ABH-00987</strong>
+                  </button>
+                  <button data-drawer="ecosystem-classification" data-ecosystem-focus="commission-tier">
+                    <span class="nav-icon" data-icon="network"></span>
+                    <span>Commission Tier</span>
+                    <strong>Platinum (12%)</strong>
+                  </button>
+                  <button class="grey-state" data-drawer="ecosystem-classification" data-ecosystem-focus="billing-gdn">
+                    <span class="nav-icon" data-icon="sync"></span>
+                    <span>Billing Routed Through GDN</span>
+                    <strong>Yes</strong>
+                  </button>
                 </div>
               </article>
 
               <article class="panel ecosystem-network-card" data-hotspot="ecosystem-map">
-                <div class="panel-title">
+                <div class="panel-title network-panel-title">
                   <div>
                     <h2>GDN Network Footprint &amp; Roles</h2>
-                    <div class="network-legend" aria-label="Network legend">
-                      <span class="legend-blue">Ardenbrook Company</span>
-                      <span class="legend-green">Product</span>
-                      <span class="legend-solution">Service / Solution</span>
-                      <span class="legend-orange">Customer Department / Service Object</span>
-                      <span class="legend-purple">Customer Contact</span>
-                    </div>
+                    <p class="network-panel-copy">GDN topology, organizational hierarchy mesh, or stakeholder persona roles.</p>
                   </div>
                   <button class="outline-button" data-drawer="ecosystem">Network View</button>
+                </div>
+
+                <div class="network-view-tabs subtabs" role="tablist" aria-label="GDN network view modes">
+                  <button class="subtab active" type="button" role="tab" aria-selected="true" data-network-view="footprint">
+                    GDN Network Footprint
+                  </button>
+                  <button class="subtab" type="button" role="tab" aria-selected="false" data-network-view="hierarchy">
+                    Organizational Hierarchy Level
+                  </button>
+                  <button class="subtab grey-state" type="button" role="tab" aria-selected="false" data-network-view="persona">
+                    Stakeholder Persona Roles
+                  </button>
+                </div>
+
+                <div class="network-view-panel active" data-network-view-panel="footprint" role="tabpanel">
+                <div class="network-legend" aria-label="Network legend">
+                  <span class="legend-blue">DerbySoft</span>
+                  <span class="legend-green">Product</span>
+                  <span class="legend-solution">Service / Solution</span>
+                  <span class="legend-orange">Customer Department / Service Object</span>
+                  <span class="legend-purple">Customer Contact</span>
                 </div>
 
                 <div class="gdn-flow-map" aria-label="GDN network footprint">
@@ -919,6 +954,162 @@
                     <span>Active Relationships</span>
                     <strong>18</strong>
                   </button>
+                </div>
+                </div>
+
+                <div class="network-view-panel" data-network-view-panel="hierarchy" role="tabpanel" hidden>
+                  <div class="mindmap-legend org-flow-legend" aria-label="Hierarchy level legend">
+                    <span class="legend-customer">Customer</span>
+                    <span class="legend-partner-associated">Partner-Associated Customer</span>
+                    <span class="legend-partner">Partner</span>
+                    <span class="legend-tech-partner">Tech Partner</span>
+                    <span class="legend-vendor">Vendor</span>
+                  </div>
+                  <p class="org-flow-note">
+                    Flow: Customer → Partner-Associated Customer → Partner → Tech Partner → Vendor. Lines show governed routing paths only.
+                  </p>
+
+                  <div class="org-hierarchy-stage">
+                    <div class="org-network-map" aria-label="Organizational hierarchy mesh">
+                      <div class="org-network-map-inner">
+                      <button class="mesh-node node-pac" data-org-target="harborview" data-drawer="ecosystem-company" data-ecosystem-focus="suzhou">
+                        <span class="mesh-level-badge badge-pac">Partner-Associated Customer</span>
+                        <strong>Ardenbrook Harborview Bethesda</strong>
+                        <small>Property billing entity · PGG-HBV-0012185</small>
+                      </button>
+                      <button class="mesh-node node-partner node-pkfare" data-org-target="pkfare" data-drawer="ecosystem-company" data-ecosystem-focus="pkfare">
+                        <span class="mesh-level-badge badge-partner">Partner</span>
+                        <strong>PKFARE</strong>
+                        <small>Distribution · API + GDS</small>
+                      </button>
+                      <button class="mesh-node mesh-hub node-customer" data-org-target="customer" data-drawer="ecosystem-company" data-ecosystem-focus="customer">
+                        <span class="mesh-level-badge badge-customer">Customer</span>
+                        <span class="nav-icon" data-icon="data"></span>
+                        <strong>Ardenbrook Hospitality Group</strong>
+                        <small>Brand hub · CUST-ARDENBROOK-99875</small>
+                      </button>
+                      <button class="mesh-node node-partner node-travelhub" data-org-target="travelhub" data-drawer="ecosystem-node" data-ecosystem-focus="travelhub">
+                        <span class="mesh-level-badge badge-partner">Partner</span>
+                        <strong>TravelHub Global</strong>
+                        <small>Primary reseller · PTR-THG-ABH-00987</small>
+                      </button>
+                      <button class="mesh-node node-tech node-derbysoft" data-org-target="derbysoft" data-drawer="ecosystem-company" data-ecosystem-focus="derbysoft">
+                        <span class="mesh-level-badge badge-tech">Tech Partner</span>
+                        <strong>DerbySoft</strong>
+                        <small>GDN platform · clearing layer</small>
+                      </button>
+                      <button class="mesh-node node-tech node-skylane" data-org-target="skylane" data-drawer="ecosystem-node" data-ecosystem-focus="skylane">
+                        <span class="mesh-level-badge badge-tech">Tech Partner</span>
+                        <strong>SkyLane PMS</strong>
+                        <small>Property PMS · NG-1902</small>
+                      </button>
+                      <button class="mesh-node node-vendor node-partnernet" data-org-target="partnernet" data-drawer="ecosystem-node" data-ecosystem-focus="partnernet">
+                        <span class="mesh-level-badge badge-vendor">Vendor</span>
+                        <strong>PartnerNet Connector</strong>
+                        <small>Connectivity · healthy</small>
+                      </button>
+                      <button class="mesh-node node-vendor node-revenuesync" data-org-target="revenuesync" data-drawer="ecosystem-node" data-ecosystem-focus="revenuesync">
+                        <span class="mesh-level-badge badge-vendor">Vendor</span>
+                        <strong>RevenueSync</strong>
+                        <small>Finance feed · degraded</small>
+                      </button>
+                      <svg class="org-link-layer mesh-link-layer" aria-hidden="true"></svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mindmap-summary-row">
+                    <button data-drawer="ecosystem-company" data-ecosystem-focus="customer">
+                      <span class="nav-icon" data-icon="customer"></span>
+                      <span>Hierarchy Levels</span>
+                      <strong>5</strong>
+                    </button>
+                    <button data-drawer="ecosystem-company" data-ecosystem-focus="pkfare">
+                      <span class="nav-icon" data-icon="sync"></span>
+                      <span>Partner Nodes</span>
+                      <strong>2</strong>
+                    </button>
+                    <button data-drawer="ecosystem-company" data-ecosystem-focus="derbysoft">
+                      <span class="nav-icon" data-icon="network"></span>
+                      <span>Tech Partner Nodes</span>
+                      <strong>2</strong>
+                    </button>
+                    <button data-drawer="ecosystem-node" data-ecosystem-focus="vendor">
+                      <span class="nav-icon" data-icon="data"></span>
+                      <span>Vendor Nodes</span>
+                      <strong>2</strong>
+                    </button>
+                    <button data-drawer="ecosystem" data-ecosystem-focus="relationships">
+                      <span class="nav-icon" data-icon="paperclip"></span>
+                      <span>Governed Paths</span>
+                      <strong>10</strong>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="network-view-panel grey-state" data-network-view-panel="persona" role="tabpanel" hidden>
+                  <div class="persona-panel-head">
+                    <h3>Stakeholder Persona Roles</h3>
+                    <span class="updated-copy">Four persona types · buying center · last reviewed 2025-05-15</span>
+                  </div>
+                  <div class="table-wrap">
+                    <table class="ecosystem-table persona-role-table">
+                      <thead>
+                        <tr>
+                          <th>Persona Role</th>
+                          <th>Contact</th>
+                          <th>Title</th>
+                          <th>Department</th>
+                          <th>Influence</th>
+                          <th>Engagement</th>
+                          <th>Primary Objective</th>
+                          <th>View</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><span class="persona-badge champion">Persona Champion</span></td>
+                          <td><strong>Lily Sterling-Hughes</strong></td>
+                          <td>CTO</td>
+                          <td>Technology</td>
+                          <td>92 / 100</td>
+                          <td><span class="pill success">High</span></td>
+                          <td>Platform adoption &amp; renewal sponsorship</td>
+                          <td><button class="link-button" data-drawer="ecosystem-contact" data-ecosystem-focus="lily">Open</button></td>
+                        </tr>
+                        <tr>
+                          <td><span class="persona-badge buyer">Economic Buyer</span></td>
+                          <td><strong>Emma Kensington</strong></td>
+                          <td>Finance Controller</td>
+                          <td>Finance</td>
+                          <td>88 / 100</td>
+                          <td><span class="pill success">High</span></td>
+                          <td>Budget approval · contract &amp; renewal economics</td>
+                          <td><button class="link-button" data-drawer="ecosystem-contact" data-ecosystem-focus="emma-contact">Open</button></td>
+                        </tr>
+                        <tr>
+                          <td><span class="persona-badge influencer">Influencer / Technical Buyer</span></td>
+                          <td><strong>David Sterling</strong></td>
+                          <td>CSO / Security Lead</td>
+                          <td>Security</td>
+                          <td>81 / 100</td>
+                          <td><span class="pill warning">Medium</span></td>
+                          <td>Architecture review · security &amp; compliance gate</td>
+                          <td><button class="link-button" data-drawer="ecosystem-contact" data-ecosystem-focus="david-contact">Open</button></td>
+                        </tr>
+                        <tr>
+                          <td><span class="persona-badge user">The User</span></td>
+                          <td><strong>Kevin Mitchell</strong></td>
+                          <td>Operations Director</td>
+                          <td>Operations</td>
+                          <td>76 / 100</td>
+                          <td><span class="pill success">High</span></td>
+                          <td>Daily platform operations &amp; workflow efficiency</td>
+                          <td><button class="link-button" data-drawer="ecosystem-contact" data-ecosystem-focus="kevin">Open</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </article>
 
