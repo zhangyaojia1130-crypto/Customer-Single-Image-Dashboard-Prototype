@@ -4,23 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Customer Single-Image Dashboard Prototype</title>
-    <link rel="stylesheet" href="styles.css?v=46" />
+    <link rel="stylesheet" href="styles.css?v=49" />
   </head>
   <body>
     <div class="app-shell">
       <aside class="sidebar" aria-label="Primary">
         <div class="brand">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2.4 20.4 7v10L12 21.6 3.6 17V7L12 2.4Z" />
-              <path d="M12 7.2 16.1 9.5v5L12 16.8l-4.1-2.3v-5L12 7.2Z" />
-            </svg>
-          </span>
-          <span>Ardenbrook Platform</span>
+          <img
+            class="brand-logo"
+            src="https://www.derbysoft.com/wp-content/uploads/2024/08/Logo.svg"
+            alt="DerbySoft"
+            width="132"
+            height="32"
+          />
+          <span class="brand-name">DerbySoft Group Customer Platform</span>
         </div>
 
         <nav class="nav-list">
-          <button class="nav-item">
+          <button class="nav-item grey-state">
             <span class="nav-icon" data-icon="home"></span>
             Home
           </button>
@@ -28,31 +29,31 @@
             <span class="nav-icon" data-icon="customer"></span>
             Customer 360
           </button>
-          <button class="nav-item">
+          <button class="nav-item grey-state">
             <span class="nav-icon" data-icon="chart"></span>
             Customer Insights
           </button>
-          <button class="nav-item">
+          <button class="nav-item grey-state">
             <span class="nav-icon" data-icon="network"></span>
             Relationship Map
           </button>
-          <button class="nav-item">
+          <button class="nav-item grey-state">
             <span class="nav-icon" data-icon="heart"></span>
             Health Monitoring
           </button>
-          <button class="nav-item">
+          <button class="nav-item grey-state">
             <span class="nav-icon" data-icon="target"></span>
             Opportunity Management
           </button>
-          <button class="nav-item">
+          <button class="nav-item grey-state">
             <span class="nav-icon" data-icon="tasks"></span>
             Task Center
           </button>
-          <button class="nav-item">
+          <button class="nav-item grey-state">
             <span class="nav-icon" data-icon="data"></span>
             Data Management
           </button>
-          <button class="nav-item">
+          <button class="nav-item grey-state">
             <span class="nav-icon" data-icon="settings"></span>
             Settings
           </button>
@@ -167,14 +168,14 @@
           </section>
 
           <nav class="domain-tabs" aria-label="Customer 360 domains">
-            <button class="domain-tab active" data-domain="identity">Identity &amp; Governance</button>
-            <button class="domain-tab" data-domain="ecosystem">Ecosystem &amp; Topology</button>
-            <button class="domain-tab" data-domain="dna">User &amp; Stakeholder DNA</button>
-            <button class="domain-tab" data-domain="lifecycle">Lifecycle &amp; Journey</button>
-            <button class="domain-tab" data-domain="behavior">Behavioral Layer</button>
-            <button class="domain-tab" data-domain="voc">Experiential &amp; VoC</button>
-            <button class="domain-tab" data-domain="health">Health &amp; Risk Matrix</button>
-            <button class="domain-tab" data-domain="operations">Operations &amp; Maintenance</button>
+            <button class="domain-tab active" data-domain="identity">Overview</button>
+            <button class="domain-tab" data-domain="ecosystem">Relation</button>
+            <button class="domain-tab grey-state" data-domain="dna">User &amp; Stakeholder DNA</button>
+            <button class="domain-tab grey-state" data-domain="lifecycle">Lifecycle &amp; Journey</button>
+            <button class="domain-tab grey-state" data-domain="behavior">Behavioral Layer</button>
+            <button class="domain-tab grey-state" data-domain="voc">Experiential &amp; VoC</button>
+            <button class="domain-tab grey-state" data-domain="health">Health &amp; Risk Matrix</button>
+            <button class="domain-tab grey-state" data-domain="operations">Operations &amp; Maintenance</button>
           </nav>
 
           <section class="domain-panel active" data-domain-panel="identity">
@@ -545,153 +546,6 @@
                 </div>
               </article>
 
-              <article class="panel governance-card" data-hotspot="governance">
-                <div class="panel-title">
-                  <h2>Governance Structure &amp; Compliance</h2>
-                  <button class="outline-button" data-drawer="governance">Edit</button>
-                </div>
-                <div class="governance-summary">
-                  <div>
-                    <span>Governance Model</span>
-                    <strong>Hybrid - Managed &amp; Franchised</strong>
-                  </div>
-                  <div>
-                    <span>Data Ownership Model</span>
-                    <strong>Business Domain Owned</strong>
-                  </div>
-                  <div>
-                    <span>Primary Data Steward</span>
-                    <strong>Jane Gallagher</strong>
-                  </div>
-                  <div>
-                    <span>Data Classification</span>
-                    <strong>Strictly Confidential - Guest &amp; PCI Data</strong>
-                  </div>
-                  <div>
-                    <span>Security Review Date</span>
-                    <strong>2025-02-28</strong>
-                  </div>
-                  <div>
-                    <span>Next Review Date</span>
-                    <strong>2025-08-28</strong>
-                  </div>
-                  <div>
-                    <span>Risk Posture</span>
-                    <strong class="positive">Low Risk</strong>
-                  </div>
-                </div>
-                <div class="compliance-layout">
-                  <section class="compliance-section">
-                    <h3>Compliance Frameworks</h3>
-                    <div class="frameworks">
-                      <span>ISO 27001<small>Compliant</small></span>
-                      <span>SOC 2 Type II<small>Compliant</small></span>
-                      <span>GDPR<small>Compliant</small></span>
-                      <span>CCPA<small>Compliant</small></span>
-                      <span>PCI DSS<small>Not Applicable</small></span>
-                    </div>
-                  </section>
-                  <section class="compliance-section">
-                    <h3>Policy &amp; Standards</h3>
-                    <div class="policy-grid">
-                      <span>Access Control Policy<small>Compliant</small></span>
-                      <span>Data Retention Policy<small>Compliant</small></span>
-                      <span>Incident Response Plan<small>Compliant</small></span>
-                      <span>Change Management Policy<small>Compliant</small></span>
-                      <span>Vendor Risk Management<small>Compliant</small></span>
-                      <span>Backup &amp; Recovery Policy<small>Compliant</small></span>
-                    </div>
-                  </section>
-                </div>
-              </article>
-
-              <article class="panel systems-card" data-hotspot="systems">
-                <div class="panel-title">
-                  <h2>Linked Systems &amp; Ownership Matrix</h2>
-                  <button class="outline-button" id="syncButton">
-                    <span class="nav-icon" data-icon="sync"></span>
-                    Sync Now
-                  </button>
-                </div>
-                <div class="table-wrap">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>System Name</th>
-                        <th>System Type</th>
-                        <th>System ID</th>
-                        <th>Owner</th>
-                        <th>Business Owner</th>
-                        <th>Integration Status</th>
-                        <th>Data Flow</th>
-                        <th>Last Sync</th>
-                      </tr>
-                    </thead>
-                    <tbody id="systemTable">
-                      <tr>
-                        <td>Ardenbrook Central Reservation Platform</td>
-                        <td>Core Application</td>
-                        <td>ACP-1001</td>
-                        <td>IT Platform Team</td>
-                        <td>Jane Gallagher</td>
-                        <td><span class="pill success">Connected</span></td>
-                        <td><span class="flow">Bi-directional</span></td>
-                        <td class="sync-time">2025-05-18 09:20</td>
-                      </tr>
-                      <tr>
-                        <td>ServiceNow ITSM</td>
-                        <td>ITSM</td>
-                        <td>SN-7900</td>
-                        <td>IT Operations</td>
-                        <td>Michael O'Connor</td>
-                        <td><span class="pill success">Connected</span></td>
-                        <td><span class="flow">Bi-directional</span></td>
-                        <td class="sync-time">2025-05-18 09:15</td>
-                      </tr>
-                      <tr>
-                        <td>Finance System</td>
-                        <td>Finance</td>
-                        <td>FIN-88132</td>
-                        <td>Finance Team</td>
-                        <td>Emma Kensington</td>
-                        <td><span class="pill success">Connected</span></td>
-                        <td><span class="flow outbound">Outbound</span></td>
-                        <td class="sync-time">2025-05-18 09:18</td>
-                      </tr>
-                      <tr>
-                        <td>Matrix Data Warehouse</td>
-                        <td>Data Warehouse</td>
-                        <td>MDW-5600</td>
-                        <td>Data Engineering</td>
-                        <td>Jane Gallagher</td>
-                        <td><span class="pill success">Connected</span></td>
-                        <td><span class="flow inbound">Inbound</span></td>
-                        <td class="sync-time">2025-05-18 09:05</td>
-                      </tr>
-                      <tr>
-                        <td>Okta SSO</td>
-                        <td>Identity Management</td>
-                        <td>OKTA-3344</td>
-                        <td>Security Team</td>
-                        <td>Jane Gallagher</td>
-                        <td><span class="pill success">Connected</span></td>
-                        <td><span class="flow">Bi-directional</span></td>
-                        <td class="sync-time">2025-05-18 09:22</td>
-                      </tr>
-                      <tr>
-                        <td>Salesforce CRM</td>
-                        <td>CRM</td>
-                        <td>SFDC-2201</td>
-                        <td>Sales Operations</td>
-                        <td>David Sterling</td>
-                        <td><span class="pill warning">Warning</span></td>
-                        <td><span class="flow">Bi-directional</span></td>
-                        <td class="sync-time">2025-05-18 08:50</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </article>
             </div>
           </section>
 
@@ -1268,7 +1122,7 @@
             </div>
           </section>
 
-          <section class="domain-panel" data-domain-panel="dna">
+          <section class="domain-panel grey-state" data-domain-panel="dna">
             <div class="dna-workspace">
               <article class="panel dna-overview-panel" data-hotspot="dna-overview">
                 <div class="panel-title">
@@ -1336,7 +1190,7 @@
             </div>
           </section>
 
-          <section class="domain-panel" data-domain-panel="lifecycle">
+          <section class="domain-panel grey-state" data-domain-panel="lifecycle">
             <div class="domain-dashboard three-column">
               <article class="panel wide" data-hotspot="lifecycle">
                 <div class="panel-title">
@@ -1372,7 +1226,7 @@
             </div>
           </section>
 
-          <section class="domain-panel" data-domain-panel="behavior">
+          <section class="domain-panel grey-state" data-domain-panel="behavior">
             <div class="domain-dashboard two-column">
               <article class="panel wide" data-hotspot="behavior">
                 <h2>Product &amp; Resource Adoption</h2>
@@ -1395,7 +1249,7 @@
             </div>
           </section>
 
-          <section class="domain-panel" data-domain-panel="voc">
+          <section class="domain-panel grey-state" data-domain-panel="voc">
             <div class="domain-dashboard two-column">
               <article class="panel">
                 <h2>VoC Scoring</h2>
@@ -1426,7 +1280,7 @@
             </div>
           </section>
 
-          <section class="domain-panel" data-domain-panel="health">
+          <section class="domain-panel grey-state" data-domain-panel="health">
             <div class="domain-dashboard two-column">
               <article class="panel wide" data-hotspot="health-matrix">
                 <div class="panel-title">
@@ -1451,7 +1305,7 @@
             </div>
           </section>
 
-          <section class="domain-panel" data-domain-panel="operations">
+          <section class="domain-panel grey-state" data-domain-panel="operations">
             <div class="domain-dashboard two-column">
               <article class="panel wide" data-hotspot="operations">
                 <div class="panel-title">
