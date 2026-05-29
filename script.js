@@ -994,6 +994,7 @@ function showDomain(domain) {
     renderGdnLinks();
     if (domain === "ecosystem") {
       scheduleOrgMeshRender();
+      scheduleHierarchyRender();
     }
   });
 }
@@ -1033,6 +1034,70 @@ function edgePointFor(element, mapRect, toward) {
 function scheduleOrgMeshRender() {
   window.requestAnimationFrame(() => {
     window.requestAnimationFrame(renderOrgMeshLinks);
+  });
+}
+
+function scheduleHierarchyRender() {
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(renderHierarchyLinks);
+  });
+}
+
+function appendHierarchyPath(layer, d) {
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", d);
+  layer.appendChild(path);
+}
+
+function renderHierarchyLinks() {
+  const map = document.querySelector(".hierarchy-map");
+  const layer = map?.querySelector(".hierarchy-link-layer");
+  const ecoPanel = map?.closest('[data-domain-panel="ecosystem"]');
+  if (!map || !layer || !ecoPanel?.classList.contains("active")) return;
+  if (map.offsetParent === null) return;
+
+  const mapRect = map.getBoundingClientRect();
+  if (!mapRect.width || !mapRect.height) return;
+
+  layer.setAttribute("viewBox", `0 0 ${mapRect.width} ${mapRect.height}`);
+  layer.innerHTML = "";
+
+  const root = map.querySelector(".hierarchy-root");
+  const parent = map.querySelector(".hierarchy-parent");
+  const branches = [...map.querySelectorAll(".branch-node")];
+  if (!root || !parent || !branches.length) return;
+
+  const anchorPoint = (element, edge) => {
+    const rect = element.getBoundingClientRect();
+    return {
+      x: rect.left - mapRect.left + rect.width / 2,
+      y: edge === "top" ? rect.top - mapRect.top : rect.bottom - mapRect.top
+    };
+  };
+
+  const fmt = (value) => value.toFixed(1);
+  const rootBottom = anchorPoint(root, "bottom");
+  const parentTop = anchorPoint(parent, "top");
+  const parentBottom = anchorPoint(parent, "bottom");
+  const branchTops = branches.map((branch) => anchorPoint(branch, "top"));
+  const railY = parentBottom.y + (Math.min(...branchTops.map((point) => point.y)) - parentBottom.y) / 2;
+  const branchXs = branchTops.map((point) => point.x);
+  const leftX = Math.min(...branchXs);
+  const rightX = Math.max(...branchXs);
+  const centerX = parentBottom.x;
+
+  appendHierarchyPath(
+    layer,
+    `M ${fmt(rootBottom.x)} ${fmt(rootBottom.y)} L ${fmt(parentTop.x)} ${fmt(parentTop.y)}`
+  );
+
+  appendHierarchyPath(
+    layer,
+    `M ${fmt(centerX)} ${fmt(parentBottom.y)} L ${fmt(centerX)} ${fmt(railY)} M ${fmt(leftX)} ${fmt(railY)} L ${fmt(rightX)} ${fmt(railY)}`
+  );
+
+  branchTops.forEach((point) => {
+    appendHierarchyPath(layer, `M ${fmt(point.x)} ${fmt(railY)} L ${fmt(point.x)} ${fmt(point.y)}`);
   });
 }
 
@@ -1859,6 +1924,7 @@ function wireEvents() {
     updateInsightsDockDensity();
     renderGdnLinks();
     renderOrgMeshLinks();
+    renderHierarchyLinks();
   });
 
   document.getElementById("contactForm").addEventListener("submit", (event) => {
@@ -1973,3 +2039,4 @@ renderCustomer("anxun", { silent: true });
 refreshStakeholderDna();
 updateInsightsDockDensity();
 renderGdnLinks();
+scheduleHierarchyRender();
