@@ -228,7 +228,12 @@ const stakeholderDnaEnrichment = {
     industryExperience: ["SaaS Platform", "AI Enablement", "Global Distribution", "Enterprise Integration"],
     assignedAE: { name: "David Sinclair", initials: "DS", portrait: "portrait-david", email: "david.sinclair@derbysoft.net" },
     assignedCSM: { name: "Emma Rutherford", initials: "ER", portrait: "portrait-emma", email: "emma.rutherford@derbysoft.net" },
-    escalationOwner: { name: "Alex Winston", initials: "AW", email: "alex.winston@derbysoft.net" },
+    escalationOwner: {
+      name: "Alex Winston",
+      initials: "AW",
+      portrait: "portrait-alex",
+      email: "alex.winston@derbysoft.net"
+    },
     lastMeeting: "2025-06-18",
     nextTouchpoint: "2025-06-28",
     priority: "high",
@@ -266,7 +271,12 @@ const stakeholderDnaEnrichment = {
     industryExperience: ["CRS Integration", "API Governance", "Data Platform", "Security Compliance"],
     assignedAE: { name: "David Sinclair", initials: "DS", portrait: "portrait-david", email: "david.sinclair@derbysoft.net" },
     assignedCSM: { name: "Emma Rutherford", initials: "ER", portrait: "portrait-emma", email: "emma.rutherford@derbysoft.net" },
-    escalationOwner: { name: "Michael O'Connor", initials: "MO", email: "michael.oconnor@derbysoft.net" },
+    escalationOwner: {
+      name: "Michael O'Connor",
+      initials: "MO",
+      portrait: "portrait-michael",
+      email: "michael.oconnor@derbysoft.net"
+    },
     lastMeeting: "2025-06-05",
     nextTouchpoint: "2025-06-25",
     priority: "medium",
@@ -303,7 +313,12 @@ const stakeholderDnaEnrichment = {
     industryExperience: ["Hotel Operations", "Product Adoption", "Workflow Automation"],
     assignedAE: { name: "David Sinclair", initials: "DS", portrait: "portrait-david", email: "david.sinclair@derbysoft.net" },
     assignedCSM: { name: "Emma Rutherford", initials: "ER", portrait: "portrait-emma", email: "emma.rutherford@derbysoft.net" },
-    escalationOwner: { name: "Emma Rutherford", initials: "ER", email: "emma.rutherford@derbysoft.net" },
+    escalationOwner: {
+      name: "Emma Rutherford",
+      initials: "ER",
+      portrait: "portrait-emma",
+      email: "emma.rutherford@derbysoft.net"
+    },
     lastMeeting: "2025-05-30",
     nextTouchpoint: "2025-07-02",
     priority: "low",
@@ -339,7 +354,12 @@ const stakeholderDnaEnrichment = {
     industryExperience: ["Hospitality Finance", "Contract Management", "Vendor Consolidation"],
     assignedAE: { name: "David Sinclair", initials: "DS", portrait: "portrait-david", email: "david.sinclair@derbysoft.net" },
     assignedCSM: { name: "Emma Rutherford", initials: "ER", portrait: "portrait-emma", email: "emma.rutherford@derbysoft.net" },
-    escalationOwner: { name: "David Sinclair", initials: "DS", email: "david.sinclair@derbysoft.net" },
+    escalationOwner: {
+      name: "David Sinclair",
+      initials: "DS",
+      portrait: "portrait-david",
+      email: "david.sinclair@derbysoft.net"
+    },
     lastMeeting: "2025-06-12",
     nextTouchpoint: "2025-06-26",
     priority: "high",
@@ -404,6 +424,7 @@ function defaultStakeholderEnrichment(contact, customer) {
         .map((part) => part[0])
         .join("")
         .slice(0, 2),
+      portrait: "portrait-david",
       email: customer.executive.email
     },
     lastMeeting: "—",
@@ -465,11 +486,12 @@ function renderMetricBar(label, value, suffix = "%") {
 
 function renderOwnerRow(label, owner) {
   const portraitClass = owner.portrait ? ` ${owner.portrait}` : "";
+  const escalationClass = label === "Executive Escalation Owner" ? " escalation-avatar" : "";
   return `
     <div class="dna-owner-row">
       <span>${escapeHtml(label)}</span>
       <div class="dna-owner-person">
-        <span class="mini-avatar portrait${portraitClass}">${escapeHtml(owner.initials)}</span>
+        <span class="mini-avatar portrait${portraitClass}${escalationClass}">${escapeHtml(owner.initials)}</span>
         <strong>${escapeHtml(owner.name)}</strong>
         <button type="button" class="icon-button dna-contact-icon" data-dna-mail="${escapeHtml(owner.email)}" aria-label="Email ${escapeHtml(owner.name)}">
           <span class="nav-icon" data-icon="mail"></span>
@@ -756,6 +778,19 @@ function refreshStakeholderDna() {
   renderDnaContacts();
 }
 
+const orgMeshLinks = [
+  ["customer", "harborview", "link-org"],
+  ["customer", "pkfare", "link-org"],
+  ["customer", "travelhub", "link-org"],
+  ["harborview", "travelhub", "link-org"],
+  ["harborview", "skylane", "link-org"],
+  ["pkfare", "derbysoft", "link-org"],
+  ["travelhub", "derbysoft", "link-org"],
+  ["derbysoft", "partnernet", "link-org"],
+  ["derbysoft", "revenuesync", "link-org"],
+  ["skylane", "partnernet", "link-org"]
+];
+
 const gdnLinks = [
   ["pkfare", "go", "link-blue"],
   ["pkfare", "exchange", "link-blue"],
@@ -955,7 +990,12 @@ function showDomain(domain) {
   document.querySelectorAll(".domain-panel").forEach((panel) => {
     panel.classList.toggle("active", panel.dataset.domainPanel === domain);
   });
-  window.requestAnimationFrame(renderGdnLinks);
+  window.requestAnimationFrame(() => {
+    renderGdnLinks();
+    if (domain === "ecosystem") {
+      scheduleOrgMeshRender();
+    }
+  });
 }
 
 function setEcosystemFocus(focus) {
@@ -966,9 +1006,89 @@ function setEcosystemFocus(focus) {
   targets.forEach((item) => item.classList.add("ecosystem-focus"));
 }
 
+function edgePointFor(element, mapRect, toward) {
+  const rect = element.getBoundingClientRect();
+  const center = {
+    x: rect.left - mapRect.left + rect.width / 2,
+    y: rect.top - mapRect.top + rect.height / 2
+  };
+  const target = {
+    x: toward.x - mapRect.left,
+    y: toward.y - mapRect.top
+  };
+  const dx = target.x - center.x;
+  const dy = target.y - center.y;
+  if (Math.abs(dy) >= Math.abs(dx)) {
+    return {
+      x: center.x,
+      y: dy > 0 ? rect.bottom - mapRect.top : rect.top - mapRect.top
+    };
+  }
+  return {
+    x: dx > 0 ? rect.right - mapRect.left : rect.left - mapRect.left,
+    y: center.y
+  };
+}
+
+function scheduleOrgMeshRender() {
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(renderOrgMeshLinks);
+  });
+}
+
+function renderOrgMeshLinks() {
+  const map = document.querySelector(".org-network-map-inner");
+  const layer = map?.querySelector(".org-link-layer");
+  if (!map || !layer || map.offsetParent === null) return;
+  const mapRect = map.getBoundingClientRect();
+  if (!mapRect.width || !mapRect.height) return;
+  layer.setAttribute("viewBox", `0 0 ${mapRect.width} ${mapRect.height}`);
+  layer.innerHTML = "";
+
+  const elementFor = (id) => map.querySelector(`[data-org-target="${id}"]`);
+  const centerFor = (id) => {
+    const element = elementFor(id);
+    if (!element) return null;
+    const rect = element.getBoundingClientRect();
+    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  };
+
+  orgMeshLinks.forEach(([from, to, className]) => {
+    const fromElement = elementFor(from);
+    const toElement = elementFor(to);
+    const toCenter = centerFor(to);
+    const fromCenter = centerFor(from);
+    if (!fromElement || !toElement || !toCenter || !fromCenter) return;
+    const start = edgePointFor(fromElement, mapRect, toCenter);
+    const end = edgePointFor(toElement, mapRect, fromCenter);
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", `M ${start.x.toFixed(1)} ${start.y.toFixed(1)} L ${end.x.toFixed(1)} ${end.y.toFixed(1)}`);
+    path.setAttribute("class", className);
+    layer.appendChild(path);
+  });
+}
+
+function switchNetworkView(button) {
+  const viewName = button.dataset.networkView;
+  document.querySelectorAll("[data-network-view]").forEach((item) => {
+    const isActive = item === button;
+    item.classList.toggle("active", isActive);
+    item.setAttribute("aria-selected", isActive ? "true" : "false");
+  });
+  document.querySelectorAll("[data-network-view-panel]").forEach((panel) => {
+    const isActive = panel.dataset.networkViewPanel === viewName;
+    panel.classList.toggle("active", isActive);
+    panel.hidden = !isActive;
+  });
+  window.requestAnimationFrame(() => {
+    if (viewName === "footprint") renderGdnLinks();
+    if (viewName === "hierarchy") scheduleOrgMeshRender();
+  });
+}
+
 function renderGdnLinks() {
   const map = document.querySelector(".gdn-flow-map");
-  const layer = document.querySelector(".gdn-link-layer");
+  const layer = map?.querySelector(".gdn-link-layer");
   if (!map || !layer || !map.closest(".domain-panel.active")) return;
   const mapRect = map.getBoundingClientRect();
   if (!mapRect.width || !mapRect.height) return;
@@ -1037,8 +1157,12 @@ function drawerTemplate(type, payload = {}) {
     shenzhen: "Ardenbrook Pacific Division",
     suzhou: "Ardenbrook Harborview Bethesda",
     reseller: "Distribution & Access Model",
+    "reseller-flag": "Is Through Reseller Flag",
+    "partner-cid": "Partner CID",
     tier: "Governance Tier",
+    "commission-tier": "Commission Tier",
     billing: "Billing Model",
+    "billing-gdn": "Billing Routed Through GDN",
     products: "Products / Services",
     departments: "Customer Departments",
     contacts: "Customer Contacts",
@@ -1711,6 +1835,10 @@ function wireEvents() {
     button.addEventListener("click", () => switchRiskTab(button));
   });
 
+  document.querySelectorAll("[data-network-view]").forEach((button) => {
+    button.addEventListener("click", () => switchNetworkView(button));
+  });
+
   const healthSummary = document.getElementById("healthSummary");
   if (healthSummary) healthSummary.addEventListener("click", () => openDrawer("risk"));
   document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
@@ -1730,6 +1858,7 @@ function wireEvents() {
   window.addEventListener("resize", () => {
     updateInsightsDockDensity();
     renderGdnLinks();
+    renderOrgMeshLinks();
   });
 
   document.getElementById("contactForm").addEventListener("submit", (event) => {
