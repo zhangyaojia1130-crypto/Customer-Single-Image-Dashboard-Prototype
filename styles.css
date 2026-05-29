@@ -1559,8 +1559,9 @@ tr:last-child td {
 }
 
 .role-badge.decision {
-  color: #165ba9;
-  background: #dbeafe;
+  color: #c41e1a;
+  background: #fee2e2;
+  font-weight: 800;
 }
 
 .role-badge.tech {
@@ -1959,24 +1960,24 @@ tr:last-child td {
   padding: 4px 0 0;
 }
 
-.hierarchy-map::before {
+.hierarchy-link-layer {
   position: absolute;
-  top: 94px;
-  bottom: 136px;
-  left: 50%;
-  width: 1px;
-  background: #b9cdf7;
-  content: "";
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
 }
 
-.hierarchy-map::after {
-  position: absolute;
-  right: 72px;
-  bottom: 112px;
-  left: 72px;
-  height: 1px;
-  background: #b9cdf7;
-  content: "";
+.hierarchy-link-layer path {
+  fill: none;
+  stroke: #6b95ea;
+  stroke-width: 1;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  shape-rendering: crispEdges;
 }
 
 .hierarchy-node,
@@ -4198,8 +4199,7 @@ tr:last-child td {
     min-height: auto;
   }
 
-  .hierarchy-map::before,
-  .hierarchy-map::after {
+  .hierarchy-link-layer {
     display: none;
   }
 
