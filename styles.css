@@ -711,16 +711,51 @@ h3 {
 .mini-avatar.portrait {
   width: 34px;
   height: 34px;
-  color: #fff;
+  color: #0f2e7a;
+  background: #dce8ff;
   font-size: 11px;
 }
 
 .portrait-david {
-  background: linear-gradient(135deg, #2563eb, #0f68ff);
+  color: #fff;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
 }
 
 .portrait-emma {
-  background: linear-gradient(135deg, #e16d8f, #f59e0b);
+  color: #fff;
+  background: linear-gradient(135deg, #9a3412, #ea580c);
+}
+
+.portrait-alex {
+  color: #fff;
+  background: linear-gradient(135deg, #0f4c81, #0f68ff);
+}
+
+.portrait-michael {
+  color: #fff;
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
+}
+
+.dna-owner-person .mini-avatar.escalation-avatar {
+  color: #fff;
+  background: #1e3a8a;
+  text-shadow: 0 1px 1px rgba(15, 23, 42, 0.28);
+}
+
+.dna-owner-person .mini-avatar.escalation-avatar.portrait-david {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+.dna-owner-person .mini-avatar.escalation-avatar.portrait-emma {
+  background: linear-gradient(135deg, #9a3412, #ea580c);
+}
+
+.dna-owner-person .mini-avatar.escalation-avatar.portrait-alex {
+  background: linear-gradient(135deg, #0f4c81, #0f68ff);
+}
+
+.dna-owner-person .mini-avatar.escalation-avatar.portrait-michael {
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
 }
 
 .owner-card strong {
@@ -1146,6 +1181,59 @@ h3 {
 .detail-list.compact dd {
   min-width: 0;
   overflow-wrap: anywhere;
+}
+
+.detail-list .grey-state dt,
+.detail-list .grey-state dd,
+.contracts-card .detail-list .grey-state dt,
+.contracts-card .detail-list .grey-state dd {
+  color: #a8b1bf;
+  font-weight: 500;
+}
+
+.hierarchy-meta-grid button.grey-state > .nav-icon,
+.hierarchy-meta-grid button.grey-state span,
+.hierarchy-meta-grid button.grey-state strong {
+  color: #a8b1bf;
+  font-weight: 500;
+}
+
+.network-view-tabs .subtab.grey-state {
+  color: #a8b1bf;
+  font-weight: 500;
+}
+
+.network-view-tabs .subtab.grey-state.active {
+  color: #a8b1bf;
+}
+
+.network-view-tabs .subtab.grey-state.active::after {
+  background: #c5cad3;
+}
+
+.network-view-panel.grey-state {
+  color: #a8b1bf;
+}
+
+.network-view-panel.grey-state .persona-panel-head h3,
+.network-view-panel.grey-state .updated-copy,
+.network-view-panel.grey-state .ecosystem-table th,
+.network-view-panel.grey-state .ecosystem-table td,
+.network-view-panel.grey-state .ecosystem-table td strong {
+  color: #a8b1bf;
+  font-weight: 500;
+}
+
+.network-view-panel.grey-state .persona-badge,
+.network-view-panel.grey-state .pill {
+  color: #a8b1bf;
+  background: #eef1f5;
+  font-weight: 500;
+}
+
+.network-view-panel.grey-state .link-button {
+  color: #a8b1bf;
+  font-weight: 500;
 }
 
 .linked-id-list {
@@ -1611,9 +1699,12 @@ tr:last-child td {
 .governance-summary div {
   display: grid;
   gap: 6px;
+  align-content: start;
+  justify-items: start;
   min-width: 0;
   padding-right: 12px;
   border-right: 1px solid var(--line);
+  text-align: left;
 }
 
 .governance-summary div:nth-child(-n + 2) {
@@ -2303,6 +2394,366 @@ tr:last-child td {
   outline: 3px solid rgba(15, 104, 255, 0.26);
   outline-offset: 2px;
   box-shadow: 0 0 0 6px rgba(15, 104, 255, 0.08);
+}
+
+.network-panel-copy {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.network-view-tabs {
+  margin-top: 4px;
+}
+
+.network-view-panel {
+  display: none;
+}
+
+.network-view-panel.active {
+  display: block;
+}
+
+.org-flow-note {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.mindmap-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin: 2px 0 14px;
+  color: #1e3a8a;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.mindmap-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mindmap-legend span::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  content: "";
+}
+
+.legend-customer::before {
+  background: var(--blue);
+}
+
+.legend-partner-associated::before {
+  background: #4f8dff;
+}
+
+.legend-partner::before {
+  background: #0f9f7f;
+}
+
+.legend-tech-partner::before {
+  background: var(--violet);
+}
+
+.legend-vendor::before {
+  background: #ef5b16;
+}
+
+.org-hierarchy-stage {
+  width: 100%;
+  padding: 8px 0 4px;
+}
+
+.org-network-map {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 640px;
+  padding: 32px 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f3f6fb;
+}
+
+.org-network-map-inner {
+  --org-node-width: 252px;
+  --org-grid-gap: 32px;
+  position: relative;
+  display: grid;
+  width: calc(var(--org-node-width) * 3 + var(--org-grid-gap) * 2);
+  grid-template-columns: var(--org-node-width) var(--org-grid-gap) var(--org-node-width) var(--org-grid-gap) var(--org-node-width);
+  grid-template-areas:
+    ". . pac . ."
+    "pkfare . . . travelhub"
+    ". . customer . ."
+    "skylane . derbysoft . partnernet"
+    ". . revenuesync . .";
+  grid-template-rows: repeat(5, minmax(116px, auto));
+  gap: 30px 0;
+  align-items: center;
+  justify-items: center;
+}
+
+.mesh-link-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mesh-link-layer path {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.mesh-node {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  align-content: start;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  text-align: left;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
+}
+
+.org-network-map-inner .mesh-node {
+  width: var(--org-node-width);
+  min-width: var(--org-node-width);
+  max-width: var(--org-node-width);
+  min-height: 108px;
+}
+
+.org-network-map-inner .mesh-node strong,
+.org-network-map-inner .mesh-node small,
+.org-network-map-inner .mesh-level-badge {
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.mesh-node strong {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.mesh-node small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.mesh-level-badge {
+  display: inline-flex;
+  width: 100%;
+  justify-content: flex-start;
+  padding: 2px 7px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.badge-customer {
+  color: var(--blue);
+  border-color: #9dc0ff;
+  background: var(--blue-soft);
+}
+
+.badge-pac {
+  color: #2563eb;
+  border-color: #9ec5ff;
+  background: #f0f6ff;
+}
+
+.badge-partner {
+  color: #0b7b3a;
+  border-color: #8fd9b0;
+  background: var(--green-soft);
+}
+
+.badge-tech {
+  color: #6227c7;
+  border-color: #cdb7ff;
+  background: var(--violet-soft);
+}
+
+.badge-vendor {
+  color: #c2410c;
+  border-color: #ffc39f;
+  background: #fffaf6;
+}
+
+.mesh-hub {
+  justify-items: center;
+  text-align: center;
+  border-width: 2px;
+  box-shadow: 0 0 0 6px rgba(15, 104, 255, 0.08);
+}
+
+.mesh-hub .nav-icon {
+  color: var(--blue);
+}
+
+.node-pac {
+  grid-area: pac;
+  border-color: #9ec5ff;
+  background: #f8fbff;
+}
+
+.node-pkfare {
+  grid-area: pkfare;
+  border-color: #8fd9c8;
+  background: #f7fffc;
+}
+
+.node-travelhub {
+  grid-area: travelhub;
+  border-color: #8fd9c8;
+  background: #f7fffc;
+}
+
+.node-customer {
+  grid-area: customer;
+  border-color: var(--blue);
+  background: linear-gradient(180deg, #f7fbff 0%, #fff 100%);
+  box-shadow:
+    0 0 0 6px rgba(15, 104, 255, 0.08),
+    0 12px 28px rgba(15, 104, 255, 0.12);
+}
+
+.node-derbysoft {
+  grid-area: derbysoft;
+  border-color: #cdb7ff;
+  background: #fcfaff;
+}
+
+.node-skylane {
+  grid-area: skylane;
+  border-color: #cdb7ff;
+  background: #fcfaff;
+}
+
+.node-partnernet {
+  grid-area: partnernet;
+  border-color: #ffc39f;
+  background: #fffaf6;
+}
+
+.node-revenuesync {
+  grid-area: revenuesync;
+  border-color: #ffc39f;
+  background: #fffaf6;
+}
+
+.org-link-layer path,
+.link-org {
+  stroke: #b8c4d4;
+}
+
+.mindmap-summary-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.mindmap-summary-row button {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 4px 10px;
+  align-items: center;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: #0f2e7a;
+  text-align: left;
+}
+
+.mindmap-summary-row button > .nav-icon {
+  grid-row: span 2;
+  color: var(--blue);
+}
+
+.mindmap-summary-row span {
+  color: #1e3a8a;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.mindmap-summary-row strong {
+  min-width: 0;
+  color: var(--text);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.persona-panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.persona-panel-head h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.persona-role-table td strong {
+  font-weight: 750;
+}
+
+.persona-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.persona-badge.champion {
+  color: #0b7b3a;
+  background: var(--green-soft);
+}
+
+.persona-badge.buyer {
+  color: #9a6500;
+  background: var(--amber-soft);
+}
+
+.persona-badge.influencer {
+  color: #6227c7;
+  background: var(--violet-soft);
+}
+
+.persona-badge.user {
+  color: #0758c8;
+  background: var(--blue-soft);
 }
 
 .network-summary-row,
@@ -3606,6 +4057,7 @@ tr:last-child td {
   }
 
   .network-summary-row,
+  .mindmap-summary-row,
   .connected-metric-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3733,6 +4185,7 @@ tr:last-child td {
   .hierarchy-branches,
   .hierarchy-meta-grid,
   .network-summary-row,
+  .mindmap-summary-row,
   .connected-metric-grid,
   .governance-mini-grid,
   .nps-grid,
